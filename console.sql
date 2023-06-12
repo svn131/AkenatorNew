@@ -11,3 +11,5 @@ insert into dbt.users_roles (user_id, role_id) VALUES (2, 2);
 insert into dbt.users (first_name, password)
 values ('admin', '$2a$12$eoIh3U2njGPs1QS1bpX3nuaYxensxXpe9gR7kk/EWovtAUhxMEiaa');
 
+
+

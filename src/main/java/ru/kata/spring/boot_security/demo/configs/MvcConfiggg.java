@@ -12,3 +12,4 @@ public class MvcConfiggg implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
     }
 }
+
