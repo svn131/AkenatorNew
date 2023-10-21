@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
@@ -22,10 +22,13 @@ public class UserRestController {
     }
 
     @GetMapping()
-    public ResponseEntity<User> getUser(Principal principal) {
+    public ResponseEntity<Vopros> getUser(Principal principal) {
         System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
-        User user = userService.findByEmail(principal.getName());
-        return ResponseEntity.ok(user);
+        Vopros vopros = new Vopros();
+        vopros.setId(1L);
+        vopros.setValue("Gdeeeeeee");
+        return ResponseEntity.ok(vopros);
     }
+
 
 }

@@ -2,36 +2,32 @@ package ru.kata.spring.boot_security.demo.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import java.util.Collection;
+import ru.kata.spring.boot_security.demo.model.Vopros;
+import ru.kata.spring.boot_security.demo.repository.VorosRepository;
+
+
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImp implements UserService {
 
-    private final UserRepository userRepository;
+    private final VorosRepository userRepository;
 
     @Autowired
-    public UserServiceImp(UserRepository userRepository) {
+    public UserServiceImp(VorosRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public User getUserById(Long id) {
-        User user = null;
-        Optional<User> optionalUser = userRepository.findById(id);
+    public Vopros getUserById(Long id) {
+        Vopros user = null;
+        Optional<Vopros> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             user = optionalUser.get();
         }
@@ -39,14 +35,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<User> getListOfUsers() {
+    public List<Vopros> getListOfUsers() {
         return userRepository.findAll();
     }
 
 
     @Override
     @Transactional
-    public void saveUser(User user) {
+    public void saveUser(Vopros user) {
         userRepository.save(user);
     }
 
@@ -58,30 +54,11 @@ public class UserServiceImp implements UserService {
     }
 
 
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toList());
-    }
-
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
-        User user = findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", email));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+//    @Override
+//    public User findByEmail(String email) {
+//        return userRepository.findByEmail(email);
+//    }
 }
 
 

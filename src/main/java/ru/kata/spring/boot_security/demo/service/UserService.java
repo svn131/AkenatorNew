@@ -1,26 +1,25 @@
 package ru.kata.spring.boot_security.demo.service;
 
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import ru.kata.spring.boot_security.demo.model.User;
+
+import ru.kata.spring.boot_security.demo.model.Vopros;
 
 
 import java.util.List;
 
 
-public interface UserService extends UserDetailsService {
-    User getUserById(Long id);
+public interface UserService  {
+    Vopros getUserById(Long id);
 
-    List<User> getListOfUsers();
+    List<Vopros> getListOfUsers();
 
     void deleteUser(Long id);
 
-    void saveUser(User user);
+    void saveUser(Vopros user);
 
-    User findByEmail(String email);
+//    User findByEmail(String email);
 
-    UserDetails loadUserByEmail(String email);
+
 
 
 }
