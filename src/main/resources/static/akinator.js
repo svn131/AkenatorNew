@@ -12,7 +12,10 @@ async function thisUser() {
     $('#vopros-id').append(voprosId);
     $('#vopros-value').append(voprosValue);
 
-    $("#vopros-image").attr("src", "images/" + data.id + ".jpg");
+    // $("#vopros-image").attr("src", "images/" + data.id + ".jpg");
+
+    $("#vopros-image").attr("src", "http://85.116.125.155:8080/myProject/images/" + data.id + ".jpg");
+
 
 }
 
