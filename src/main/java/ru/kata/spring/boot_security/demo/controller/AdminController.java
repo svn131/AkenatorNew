@@ -41,7 +41,8 @@ public class AdminController {
 
     @PostMapping("/newUser")
     public ResponseEntity<Vopros> createUser(@RequestBody Vopros user) {
-        userService.saveUser(user);
+//        userService.saveUser(user);
+        System.out.println(           "Aaaaaaaaaaaaaa user"                      );
         return ResponseEntity.ok(user);
     }
 

@@ -22,7 +22,7 @@ public class UserRestController {
     }
 
     @GetMapping()
-    public ResponseEntity<Vopros> getUser(Principal principal) {
+    public ResponseEntity<Vopros> vidachaFirst() {
         System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
         Vopros vopros = new Vopros();
         vopros.setId(1L);
@@ -30,5 +30,32 @@ public class UserRestController {
         return ResponseEntity.ok(vopros);
     }
 
+
+    @PostMapping("yes")
+    public ResponseEntity<Vopros> yes() {
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        Vopros vopros = new Vopros();
+        vopros.setId(1L);
+        vopros.setValue("Yes");
+        return ResponseEntity.ok(vopros);
+    }
+
+    @PostMapping("no")
+    public ResponseEntity<Vopros> no() {
+        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+        Vopros vopros = new Vopros();
+        vopros.setId(1L);
+        vopros.setValue("No");
+        return ResponseEntity.ok(vopros);
+    }
+
+    @PostMapping("nany")
+    public ResponseEntity<Vopros> nany() {
+        System.out.println("7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77");
+        Vopros vopros = new Vopros();
+        vopros.setId(1L);
+        vopros.setValue("Nany");
+        return ResponseEntity.ok(vopros);
+    }
 
 }
