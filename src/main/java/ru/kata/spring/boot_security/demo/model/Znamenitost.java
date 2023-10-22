@@ -3,25 +3,29 @@ package ru.kata.spring.boot_security.demo.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
-@Entity
-@Table(name = "znamenitost")
+//@Entity
+//@Table(name = "znamenitost")
 public class Znamenitost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
 
+//    @OneToMany(mappedBy = "astonishments", cascade = CascadeType.ALL)
+    private List<Vopros> otvetyList;
 
 
-    public void setId(Long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -34,6 +38,18 @@ public class Znamenitost {
     }
 
     public Znamenitost() {
+    }
+
+    public Znamenitost(String name) {
+        this.name = name;
+    }
+
+    public List<Vopros> getOtvetyList() {
+        return otvetyList;
+    }
+
+    public void setOtvetyList(List<Vopros> otvetyList) {
+        this.otvetyList = otvetyList;
     }
 }
 

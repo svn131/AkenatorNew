@@ -9,9 +9,9 @@ public class MvcConfiggg implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
 
         System.out.println();
-        registry.addViewController("/useraa").setViewName("akinat");
-        registry.addViewController("/admin").setViewName("admin_page");
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/myProject").setViewName("akinat");
+//        registry.addViewController("/admin").setViewName("admin_page");
+//        registry.addViewController("/login").setViewName("login");
     }
 }
 

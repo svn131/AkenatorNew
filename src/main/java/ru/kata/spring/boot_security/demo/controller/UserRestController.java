@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Vopros;
+import ru.kata.spring.boot_security.demo.model.Znamenitost;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
@@ -25,7 +26,7 @@ public class UserRestController {
     public ResponseEntity<Vopros> vidachaFirst() {
         System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
         Vopros vopros = new Vopros();
-        vopros.setId(1L);
+        vopros.setId(1);
         vopros.setValue("Gdeeeeeee");
         return ResponseEntity.ok(vopros);
     }
@@ -35,8 +36,15 @@ public class UserRestController {
     public ResponseEntity<Vopros> yes() {
         System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         Vopros vopros = new Vopros();
-        vopros.setId(1L);
+        vopros.setId(2);
         vopros.setValue("Yes");
+
+
+        userService.vivodVConsol();
+
+
+
+
         return ResponseEntity.ok(vopros);
     }
 
@@ -44,7 +52,7 @@ public class UserRestController {
     public ResponseEntity<Vopros> no() {
         System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
         Vopros vopros = new Vopros();
-        vopros.setId(1L);
+        vopros.setId(3);
         vopros.setValue("No");
         return ResponseEntity.ok(vopros);
     }
@@ -53,7 +61,7 @@ public class UserRestController {
     public ResponseEntity<Vopros> nany() {
         System.out.println("7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77");
         Vopros vopros = new Vopros();
-        vopros.setId(1L);
+        vopros.setId(1);
         vopros.setValue("Nany");
         return ResponseEntity.ok(vopros);
     }
