@@ -3,7 +3,7 @@ $(async function () {
 });
 
 async function thisUser() {
-    const response = await fetch("http://localhost:8080/userProfile");
+    const response = await fetch("http://85.116.125.155:8080/userProfile");
     const data = await response.json();
 
     let voprosId = $(`<td>${data.id}</td>`);
@@ -26,7 +26,8 @@ $(function () {
         ev.preventDefault();
 
         // Отправляем пустое тело запроса
-        await fetch("http://localhost:8080/userProfile/yes", {
+        // await fetch("http://localhost:8080/userProfile/yes", {
+        await fetch("http://85.116.125.155:8080/userProfile/yes", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +55,7 @@ $(function () {
         ev.preventDefault();
 
         // Отправляем пустое тело запроса
-        await fetch("http://localhost:8080/userProfile/nany", {
+        await fetch("http://85.116.125.155:8080/userProfile/nany", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +82,7 @@ $(function () {
         ev.preventDefault();
 
         // Отправляем пустое тело запроса
-        await fetch("http://localhost:8080/userProfile/no", {
+        await fetch("http://85.116.125.155:8080/userProfile/no", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -27,7 +27,7 @@ public class UserRestController {
         System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
         Vopros vopros = new Vopros();
         vopros.setId(1);
-        vopros.setValue("Gdeeeeeee");
+        vopros.setValue("Gdeeeeeee  ?");
         return ResponseEntity.ok(vopros);
     }
 
