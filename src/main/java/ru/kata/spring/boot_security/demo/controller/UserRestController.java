@@ -51,7 +51,7 @@ public class UserRestController {
     }
 
     @PostMapping("no")
-    @CrossOrigin(origins = "*")
+//    @CrossOrigin(origins = "*")
     public ResponseEntity<Vopros> no() {
         System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
         Vopros vopros = new Vopros();
@@ -61,11 +61,11 @@ public class UserRestController {
     }
 
     @PostMapping("nany")
-    @CrossOrigin(origins = "*")
+//    @CrossOrigin(origins = "*")
     public ResponseEntity<Vopros> nany() {
         System.out.println("7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77");
         Vopros vopros = new Vopros();
-        vopros.setId(2);
+        vopros.setId(1);
         vopros.setValue("Nany");
         return ResponseEntity.ok(vopros);
     }
