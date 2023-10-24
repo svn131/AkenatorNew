@@ -31,6 +31,7 @@
   .button-group {
     display: flex;
     justify-content: center;
+    margin-bottom: 5rem;
   }
 
   .button {
@@ -51,16 +52,17 @@
   <form id="yesForm" onsubmit="return false;">
     <button class="button" onclick="answerYes()">ДА, сыграем еще</button>
   </form>
+</div>
 
-  <form id="noneForm" onsubmit="return false;">
-    <button class="button" onclick="answerNo()">Нет , ВОТ что это</button>
-  </form>
+<div class="text-center" style="font-weight: bold; font-size: 2em;">
+  Нет, это
+</div>
 
+<div class="button-group">
   <form id="inputForm" onsubmit="return false;">
     <input type="text" id="userInput" placeholder="Введите текст">
     <button class="button" onclick="sendData()">Отправить</button>
   </form>
-
 </div>
 </body>
 
