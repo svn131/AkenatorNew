@@ -52,7 +52,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/no", {
+    const response = await fetch("http://85.116.125.155:8080/conec/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -64,6 +64,24 @@ async function answerNo() {
 
     // $('#vopros-value').text(data.value);
     $('#vopros-value').empty().append(data.value);
-    $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
+
+    console.log(data);
+}
+
+async function sendData() {
+    const userInput = document.getElementById("userInput").value;
+
+    const response = await fetch("http://85.116.125.155:8080/conec/no", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input: userInput })
+    });
+
+    const data = await response.json();
+
+    $('#vopros-value').empty().append(data.value);
+
     console.log(data);
 }

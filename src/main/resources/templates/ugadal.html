@@ -53,9 +53,13 @@
   </form>
 
   <form id="noneForm" onsubmit="return false;">
-    <button class="button" onclick="answerNone()">Нет , ВОТ что это</button>
+    <button class="button" onclick="answerNo()">Нет , ВОТ что это</button>
   </form>
 
+  <form id="inputForm" onsubmit="return false;">
+    <input type="text" id="userInput" placeholder="Введите текст">
+    <button class="button" onclick="sendData()">Отправить</button>
+  </form>
 
 </div>
 </body>

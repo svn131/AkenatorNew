@@ -16,6 +16,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -103,4 +104,16 @@ public class ConecREstController {
     }
 
 
+    @PostMapping("no")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Vopros> no(@RequestBody Map<String, String> requestBody) {
+        String userInput = requestBody.get("input"); // Получение переданного текста
+
+
+        System.out.println("MFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFV");
+        System.out.println(userInput);
+
+
+        return ResponseEntity.ok().build();
+    }
 }
