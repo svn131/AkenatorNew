@@ -2,9 +2,12 @@ package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -64,6 +67,8 @@ public class UserRestController {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
         response.addHeader("Set-Cookie", "session_id=" + sessionId);
 
+        System.out.println("SEEEEEEEEEEEEEET " + sessionId);
+
 
         return ResponseEntity.ok(vopros);
     }
@@ -71,8 +76,8 @@ public class UserRestController {
 
     @PostMapping("yes")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> yes(HttpServletRequest request) {
-//        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    public ResponseEntity<Vopros> yes(HttpServletRequest request, HttpServletResponse response) {
+        //        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 //        Vopros vopros = new Vopros();
 //        vopros.setId(2);
 //        vopros.setValue("Yes");
@@ -92,6 +97,8 @@ public class UserRestController {
 
         }
 
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
         System.out.println(igrok.toString());
 
@@ -103,9 +110,31 @@ public class UserRestController {
         userService.reforma(igrok, 1);
 
 
+//       int ostalos = igrok.getListVozmohnyhVariantov().size();
+//
+//        if (ostalos == 1) {
+//
+//            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+//            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Location", "ugadal");
+//            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+//        }
+//
+//        if (ostalos == 0) {
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Location", "neznayuChto");
+//            return new ResponseEntity<>(headers, HttpStatus.FOUND);
+//        }
+
+
         Vopros vopros = userService.getPriorityVopros(igrok);
 //        igrok.setZaddanyiVopros(vopros.getId());
 
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
         return ResponseEntity.ok(vopros);
     }
 
@@ -164,6 +193,13 @@ public class UserRestController {
 
         return ResponseEntity.ok(vopros);
     }
+
+
+//    @GetMapping("/neznayuChto")
+//    public String neznayuChto (){
+//        System.out.println("piiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+//        return "redirect:/neznayuChto";
+//    }
 
 
 //    @GetMapping()

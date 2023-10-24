@@ -1,11 +1,9 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-//@Entity
-//@Table(name = "vopros")
+
 public class Vopros implements Comparable<Vopros> {
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
 
     private String value;
@@ -133,6 +131,16 @@ public class Vopros implements Comparable<Vopros> {
                 ", countMinus1=" + countMinus1 +
                 '}';
     }
+
+    public Vopros(Vopros vopros) {
+        this.id = vopros.id;
+//        this.value = new String(vopros.value);
+        this.otvet = vopros.otvet;
+        this.count1 = vopros.count1;
+        this.countMinus1 = vopros.countMinus1;
+    }
+
+
 }
 
 //        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {

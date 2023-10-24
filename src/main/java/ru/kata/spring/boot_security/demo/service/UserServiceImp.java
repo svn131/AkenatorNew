@@ -88,7 +88,20 @@ public class UserServiceImp implements UserService {
 
 
     public Igrok getNewIgrok(String kukiId) {
-        Igrok igrok = new Igrok(kukiId, repository.getZnamenitostList(), repository.getVoprosList());
+        ArrayList<Znamenitost> znamenitostsList= new ArrayList<>();
+        for (Znamenitost znamenitost : repository.getZnamenitostList()) {
+            znamenitostsList.add(new Znamenitost(znamenitost));
+        }
+        ArrayList<Vopros> voprosList= new ArrayList<>();
+
+        for (Vopros vopros : repository.getVoprosList()) {
+            Vopros vop = new Vopros(vopros.getId(),vopros.getValue());
+
+            voprosList.add(vopros);
+        }
+
+        repository.getVoprosList();
+        Igrok igrok = new Igrok(kukiId, znamenitostsList, voprosList);
         repository.getListIgrokov().add(igrok);
         return igrok;
     }

@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,9 +53,26 @@ public class Znamenitost {
         this.otvetyList = otvetyList;
     }
 
+   public Znamenitost (Znamenitost znamenitost) {
+        this.id = znamenitost.id;
+        this.name = new String(znamenitost.getName());
 
+        // Клонирование списка otvetyList
+        if (znamenitost.otvetyList != null) {
+            this.otvetyList = new ArrayList<>();
+            for (Vopros vopros : znamenitost.otvetyList) {
+                this.otvetyList.add(new Vopros(vopros));
+            }
+        }
 
+        // Клонирование массива badVopros
+        if (znamenitost.badVopros != null) {
+            this.badVopros = znamenitost.badVopros.clone();
+        }
+    }
 
 }
+
+
 
 
