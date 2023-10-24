@@ -51,8 +51,9 @@ public class Vopros implements Comparable<Vopros> {
         this.otvet = otvet;
     }
 
-    public Vopros(int otvet) {
+    public Vopros(int id,int otvet) {
         this.otvet = otvet;
+        this.id = id;
     }
 
 
@@ -99,5 +100,53 @@ public class Vopros implements Comparable<Vopros> {
 
         return 0;
     }
+
+
+//    @Override
+//    public int compareTo(Vopros vo) {
+//        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {
+//            // Если оба объекта имеют countMinus1 > count1, сравниваем по count1
+//            return Integer.compare(this.count1, vo.count1);
+//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 <= vo.count1) {
+//            // Если оба объекта имеют countMinus1 <= count1, сравниваем по countMinus1
+//            return Integer.compare(this.countMinus1, vo.countMinus1);
+//        } else if (this.countMinus1 > this.count1 && vo.count1 > vo.countMinus1) {
+//            // Сравниваем countMinus1 с count1
+//            return Integer.compare(this.countMinus1, vo.count1);
+//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 > vo.count1) {
+//            // Сравниваем count1 с countMinus1
+//            return Integer.compare(this.count1, vo.countMinus1);
+//        }
+//
+//        return 0;
+//    }
+
+
+
+    @Override
+    public String toString() {
+        return "Vopros{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                ", otvet=" + otvet +
+                ", count1=" + count1 +
+                ", countMinus1=" + countMinus1 +
+                '}';
+    }
 }
 
+//        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {
+//                // Если оба объекта имеют countMinus1 > count1, сравниваем по count1
+//                return Integer.compare(this.count1, vo.count1);
+//                } else if (this.countMinus1 <= this.count1 && vo.countMinus1 <= vo.count1) {
+//                // Если оба объекта имеют countMinus1 <= count1, сравниваем по countMinus1
+//                return Integer.compare(this.countMinus1, vo.countMinus1);
+//                } else if (this.countMinus1 <= this.count1 && vo.count1 <= vo.countMinus1) {
+//
+//                return Integer.compare(this.countMinus1, vo.count1);
+//
+//                } else if ( this.count1 <= this.countMinus1  && vo.countMinus1  <=  vo.count1) {
+//
+//                return Integer.compare(this.count1, vo.countMinus1);
+//
+//                }

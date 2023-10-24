@@ -128,14 +128,13 @@ public class PsrserExel {
 
             if (cell != null && cell.getCellType() == CellType.NUMERIC) {
                 int intValue = (int) cell.getNumericCellValue();
-                otvetyDlyaOndnogo.add(new Vopros(intValue));
+                otvetyDlyaOndnogo.add(new Vopros(i,intValue));
 
 
 
             }
 
         }
-//        nomerTemp = 1;
         nomerTemp++;
         return otvetyDlyaOndnogo;
 

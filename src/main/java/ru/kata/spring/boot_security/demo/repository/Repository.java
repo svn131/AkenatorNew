@@ -3,9 +3,11 @@ package ru.kata.spring.boot_security.demo.repository;
 
 
 import org.springframework.stereotype.Component;
+import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.model.Znamenitost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -15,6 +17,8 @@ public class Repository {
     List<Vopros> voprosList;
 
     List<Znamenitost> znamenitostList;
+
+    List<Igrok> listIgrokov = new ArrayList<>(); // todo не забыть убрать после вйгрыша
 
 
 
@@ -42,5 +46,14 @@ public class Repository {
 
     public List<Znamenitost> getZnamenitostList() {
         return znamenitostList;
+    }
+
+
+    public List<Igrok> getListIgrokov() {
+        return listIgrokov;
+    }
+
+    public void setListIgrokov(List<Igrok> listIgrokov) {
+        this.listIgrokov = listIgrokov;
     }
 }
