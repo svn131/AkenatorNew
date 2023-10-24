@@ -21,6 +21,7 @@ async function thisUser() {
 
     console.log(data);
 
+
 }
 
 
@@ -37,9 +38,21 @@ async function answerYes() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
     $('#vopros-value').empty().append(data.value);
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
+
+
+    if (voprosId === 5000) {
+        console.log('tttttttttttuuuuut');
+        window.location.href = "http://85.116.125.155:8080/ugadal";
+    }
+    if (voprosId === 5001) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = "http://85.116.125.155:8080/neznayuChto";
+    }
+
 }
 
 // Аналогично для функций answerNo() и answerNone()

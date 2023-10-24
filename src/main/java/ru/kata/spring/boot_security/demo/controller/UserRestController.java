@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -110,28 +111,51 @@ public class UserRestController {
         userService.reforma(igrok, 1);
 
 
-//       int ostalos = igrok.getListVozmohnyhVariantov().size();
-//
-//        if (ostalos == 1) {
-//
-//            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-//            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-//
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("Location", "ugadal");
-//            return new ResponseEntity<>(headers, HttpStatus.FOUND);
-//        }
-//
-//        if (ostalos == 0) {
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("Location", "neznayuChto");
-//            return new ResponseEntity<>(headers, HttpStatus.FOUND);
-//        }
-
+       int ostalos = igrok.getListVozmohnyhVariantov().size();
 
         Vopros vopros = userService.getPriorityVopros(igrok);
-//        igrok.setZaddanyiVopros(vopros.getId());
 
+
+            // Выполнение редиректа на другую страницу
+//            throw new NotLoggedInException("please log in", "/ugadal");
+
+//
+        if (ostalos == 1) {
+
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
+        }
+
+        if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+            vopros = new Vopros();
+            vopros.setId(5001);
+            vopros.setValue("Yes");
+
+        }
+
+
+
+
+
+
+
+//        int ostalos = 1;
+
+//        if (ostalos == 1) {
+//
+//            System.out.println("FIIIIIIIIIIIIIIIIIIIIIIIIII");
+//
+//
+//            vopros = new Vopros();
+//            vopros.setId(5000);
+//            vopros.setValue("Yes");
+//
+//        }
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
         response.addHeader("Set-Cookie", "session_id=" + sessionIda);
