@@ -20,6 +20,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/userProfile")
 public class UserRestController {
+
+
     private final UserService userService;
 
     @Autowired
@@ -49,9 +51,11 @@ public class UserRestController {
         }
 
         // Создаем объект Vopros с id и value
-        Vopros vopros = new Vopros();
-        vopros.setId(2);
-        vopros.setValue("valyyy kyk" + sessionId);
+//        Vopros vopros = new Vopros();
+//        vopros.setId(2);
+//        vopros.setValue("valyyy kyk" + sessionId);
+
+      Vopros vopros =  userService.getFirsttVopros(userService.getNewIgrok(sessionId));
 
 // Используйте значение sessionId для идентификации пользователя
 // Устанавливаем куку сессии в ответе сервера
@@ -62,15 +66,6 @@ public class UserRestController {
 
 
 
-//    @GetMapping()
-//    @CrossOrigin(origins = "*")
-//    public ResponseEntity<Vopros> vidachaFirst() {
-//        System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
-//        Vopros vopros = new Vopros();
-//        vopros.setId(1);
-//        vopros.setValue("Gdeeeeeee  ?");
-//        return ResponseEntity.ok(vopros);
-//    }
 
 
     @PostMapping("yes")
@@ -144,6 +139,19 @@ public class UserRestController {
 
         return ResponseEntity.ok(vopros);
     }
+
+
+//    @GetMapping()
+//    @CrossOrigin(origins = "*")
+//    public ResponseEntity<Vopros> vidachaFirst() {
+//        System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
+//        Vopros vopros = new Vopros();
+//        vopros.setId(1);
+//        vopros.setValue("Gdeeeeeee  ?");
+//        return ResponseEntity.ok(vopros);
+//    }
+
+
 
 
 

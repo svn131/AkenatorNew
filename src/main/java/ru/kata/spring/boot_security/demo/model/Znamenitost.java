@@ -19,7 +19,7 @@ public class Znamenitost {
 //    @OneToMany(mappedBy = "astonishments", cascade = CascadeType.ALL)
     private List<Vopros> otvetyList;
 
-
+    private int[] badVopros;
 
     public void setId(int id) {
         this.id = id;
@@ -51,6 +51,10 @@ public class Znamenitost {
     public void setOtvetyList(List<Vopros> otvetyList) {
         this.otvetyList = otvetyList;
     }
+
+
+
+
 }
 
 
