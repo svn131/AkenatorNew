@@ -11,7 +11,7 @@ public interface UserService  {
 
     public Repository getRepository();
 
-    public Vopros getPriorityVopros(Igrok igrok);
+    public Vopros getPriorityVopros(Igrok igrok,int vibor);
 
     public Igrok getNewIgrok (String kukiId);
 

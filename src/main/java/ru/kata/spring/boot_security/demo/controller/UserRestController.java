@@ -59,7 +59,7 @@ public class UserRestController {
 //        vopros.setId(2);
 //        vopros.setValue("valyyy kyk" + sessionId);
         Igrok igrok = userService.getNewIgrok(sessionId);
-        Vopros vopros = userService.getPriorityVopros(igrok);
+        Vopros vopros = userService.getPriorityVopros(igrok,2);
 
 
 //        igrok.setZaddanyiVopros(vopros.getId());
@@ -115,7 +115,7 @@ public class UserRestController {
 
        int ostalos = igrok.getListVozmohnyhVariantov().size();
 
-        Vopros vopros = userService.getPriorityVopros(igrok);
+        Vopros vopros = userService.getPriorityVopros(igrok,1);
 
 
             // Выполнение редиректа на другую страницу

@@ -111,8 +111,12 @@ public class ConecREstController {
         System.out.println(userInput);
 
 
-        System.out.println( saveService.poisk(userInput));
+        if (saveService.poisk(userInput)) {
 
+            System.out.println("22222222222");
+
+
+        }
         return ResponseEntity.ok().build();
     }
 }

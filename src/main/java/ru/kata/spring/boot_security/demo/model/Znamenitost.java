@@ -20,7 +20,8 @@ public class Znamenitost {
 //    @OneToMany(mappedBy = "astonishments", cascade = CascadeType.ALL)
     private List<Vopros> otvetyList;
 
-    private int[] badVopros;
+    private List<Integer> listSomnenyi = new ArrayList<>();
+
 
     public void setId(int id) {
         this.id = id;
@@ -65,12 +66,20 @@ public class Znamenitost {
             }
         }
 
-        // Клонирование массива badVopros
-        if (znamenitost.badVopros != null) {
-            this.badVopros = znamenitost.badVopros.clone();
-        }
+//        // Клонирование массива badVopros
+//        if (znamenitost.badVopros != null) {
+//            this.badVopros = znamenitost.badVopros.clone();
+//        }
     }
 
+
+    public List<Integer> getListSomnenyi() {
+        return listSomnenyi;
+    }
+
+    public void addListSomnenyi(Integer i) {
+       listSomnenyi.add(i);
+    }
 }
 
 

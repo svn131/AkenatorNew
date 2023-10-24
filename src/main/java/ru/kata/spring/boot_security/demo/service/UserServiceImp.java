@@ -125,7 +125,13 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    public Vopros getPriorityVopros(Igrok igrok) { // todo упростить сушноси добавив ответы
+    public Vopros getPriorityVopros(Igrok igrok, int vibor) { // todo упростить сушноси добавив ответы
+
+        if(igrok.getListPamyty().size() != 0){
+            igrok.getListPamyty().get(igrok.getListPamyty().size()-1).setOtvet(vibor); // логим
+        }
+
+
 
         for (Znamenitost znamenytost : igrok.getListVozmohnyhVariantov()) {
             for (Vopros vopros : znamenytost.getOtvetyList()) {
@@ -155,10 +161,15 @@ public class UserServiceImp implements UserService {
 //        System.out.println(igrok.getListOstavshihsyaVoprosov().get(3).toString());
 
 //todo pomenyt peremennuy 5 shtuk oboznachit korotko
-        Vopros vopros = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1);
 
-        igrok.setListPamyty(vopros);
-        return vopros; // todo проверить самый путевый это 0 или последний ??
+
+            int idy = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1).getId();
+            Vopros vopros = new Vopros();
+            vopros.setId(idy);
+
+            igrok.setListPamyty(vopros);
+
+        return igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1); // todo проверить самый путевый это 0 или последний ??
 
     }
 

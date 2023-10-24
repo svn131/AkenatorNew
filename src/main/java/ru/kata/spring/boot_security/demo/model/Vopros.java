@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vopros implements Comparable<Vopros> {
 
@@ -15,6 +17,7 @@ public class Vopros implements Comparable<Vopros> {
     private int count1;
 
     private int countMinus1;
+
 
 
     public int getId() {
