@@ -10,8 +10,6 @@ public class Igrok {
 
     List<Vopros>  listOstavshihsyaVoprosov;
 
-   int zaddanyiVopros;
-
 
     public Igrok(String idKuki, List<Znamenitost> listVozmohnyhVariantov, List<Vopros> listOstavshihsyaVoprosov) {
         this.idKuki = idKuki;
@@ -34,13 +32,7 @@ public class Igrok {
         this.idKuki = idKuki;
     }
 
-    public int getZaddanyiVopros() {
-        return zaddanyiVopros;
-    }
 
-    public void setZaddanyiVopros(int zaddanyiVopros) {
-        this.zaddanyiVopros = zaddanyiVopros;
-    }
 
     public List<Znamenitost> getListVozmohnyhVariantov() {
         return listVozmohnyhVariantov;
@@ -64,7 +56,6 @@ public class Igrok {
                 "idKuki='" + idKuki + '\'' +
                 ", listVozmohnyhVariantov=" + listVozmohnyhVariantov +
                 ", listOstavshihsyaVoprosov=" + listOstavshihsyaVoprosov +
-                ", zaddanyiVopros=" + zaddanyiVopros +
                 ", regimNapolnitel=" + regimNapolnitel +
                 '}';
     }

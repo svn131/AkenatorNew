@@ -38,21 +38,21 @@ public class UserRestController {
         System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
 
         // Получаем значение сессионной куки
-//        String sessionId = null;
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("session_id")) {
-//                    sessionId = cookie.getValue();
-//                    System.out.println("кука first ---------------------------------- "+ sessionId);
-//                    break;
-//                }
-//            }
-//        }else {
+        String sessionId = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionId = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- "+ sessionId);
+                    break;
+                }
+            }
+        }else {
         // Генерируем уникальный идентификатор для сессии
-        String sessionId = new String();
+//            sessionId = new String();
         sessionId = UUID.randomUUID().toString();
-//        }
+        }
 //
 //         Создаем объект Vopros с id и value
 //        Vopros vopros = new Vopros();

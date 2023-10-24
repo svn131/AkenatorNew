@@ -33,6 +33,13 @@ public class UserServiceImp implements UserService {
         this.repository = repository;
     }
 
+    public void removeIgrok(Igrok igrok){
+        repository.getListIgrokov().remove(igrok);
+
+    }
+
+
+
 
     @Override
     public Igrok reforma(Igrok igrok,int otvet) {
@@ -100,7 +107,6 @@ public class UserServiceImp implements UserService {
             voprosList.add(vopros);
         }
 
-        repository.getVoprosList();
         Igrok igrok = new Igrok(kukiId, znamenitostsList, voprosList);
         repository.getListIgrokov().add(igrok);
         return igrok;

@@ -18,6 +18,8 @@ public interface UserService  {
     public Igrok getIgrok(String kukiId);
 
     public Igrok reforma(Igrok igrok , int otvet);
+
+    public void removeIgrok(Igrok igrok);
 }
 
 

@@ -55,7 +55,7 @@ public class ConecREstController {
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-       String otvet = igrok.getListVozmohnyhVariantov().get(0).getName();
+        String otvet = igrok.getListVozmohnyhVariantov().get(0).getName();
 
         Vopros vopros = new Vopros();
         vopros.setId(5002);
@@ -63,5 +63,44 @@ public class ConecREstController {
 
         return ResponseEntity.ok(vopros);
     }
+
+    @PostMapping("yes")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Vopros> yes(HttpServletRequest request, HttpServletResponse response) {
+
+        System.out.println("REEEE");
+        System.out.println("REEEEEEEEEEE");
+
+
+        String sessionIda = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionIda = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- " + sessionIda);
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+        Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+
+        userService.removeIgrok(igrok);
+
+
+        Vopros vopros = new Vopros();
+        vopros.setId(5000);
+        vopros.setValue("Yes");
+
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        return ResponseEntity.ok(vopros);
+    }
+
 
 }
