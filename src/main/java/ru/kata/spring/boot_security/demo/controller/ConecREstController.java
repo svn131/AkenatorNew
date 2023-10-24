@@ -2,23 +2,18 @@ package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.serviceSave.SaveService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 
 
 @RestController
@@ -27,10 +22,12 @@ public class ConecREstController {
 
 
     private final UserService userService;
+    private final SaveService saveService;
 
     @Autowired
-    public ConecREstController(UserService userService) {
+    public ConecREstController(UserService userService, SaveService saveService) {
         this.userService = userService;
+        this.saveService = saveService;
     }
 
     @GetMapping()
@@ -113,6 +110,8 @@ public class ConecREstController {
         System.out.println("MFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFV");
         System.out.println(userInput);
 
+
+        System.out.println( saveService.poisk(userInput));
 
         return ResponseEntity.ok().build();
     }

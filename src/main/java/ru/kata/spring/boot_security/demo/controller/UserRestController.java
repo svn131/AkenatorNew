@@ -60,6 +60,8 @@ public class UserRestController {
 //        vopros.setValue("valyyy kyk" + sessionId);
         Igrok igrok = userService.getNewIgrok(sessionId);
         Vopros vopros = userService.getPriorityVopros(igrok);
+
+
 //        igrok.setZaddanyiVopros(vopros.getId());
 
 // Используйте значение sessionId для идентификации пользователя
@@ -130,8 +132,7 @@ public class UserRestController {
             vopros.setValue("Yes");
 
         }
-
-        if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+        else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
             vopros = new Vopros();
             vopros.setId(5001);
             vopros.setValue("Yes");

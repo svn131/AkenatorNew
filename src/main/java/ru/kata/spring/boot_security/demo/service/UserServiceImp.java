@@ -155,7 +155,10 @@ public class UserServiceImp implements UserService {
 //        System.out.println(igrok.getListOstavshihsyaVoprosov().get(3).toString());
 
 //todo pomenyt peremennuy 5 shtuk oboznachit korotko
-        return igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1); // todo проверить самый путевый это 0 или последний ??
+        Vopros vopros = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1);
+
+        igrok.setListPamyty(vopros);
+        return vopros; // todo проверить самый путевый это 0 или последний ??
 
     }
 

@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Igrok {
@@ -9,6 +10,8 @@ public class Igrok {
     List<Znamenitost> listVozmohnyhVariantov;
 
     List<Vopros>  listOstavshihsyaVoprosov;
+
+    List<Vopros>  listPamyty = new ArrayList<>();
 
 
     public Igrok(String idKuki, List<Znamenitost> listVozmohnyhVariantov, List<Vopros> listOstavshihsyaVoprosov) {
@@ -50,6 +53,14 @@ public class Igrok {
         this.listOstavshihsyaVoprosov = listOstavshihsyaVoprosov;
     }
 
+    public List<Vopros> getListPamyty() {
+        return listPamyty;
+    }
+
+    public void setListPamyty(Vopros vopros) {
+        listPamyty.add(vopros);
+    }
+
     @Override
     public String toString() {
         return "Igrok{" +
@@ -59,4 +70,8 @@ public class Igrok {
                 ", regimNapolnitel=" + regimNapolnitel +
                 '}';
     }
+
+
+
+
 }
