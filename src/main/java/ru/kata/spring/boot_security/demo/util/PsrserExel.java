@@ -21,6 +21,8 @@ public class PsrserExel {
 
     int nomerTemp = 1;
 
+    int idZnamenitostyTemp = 1;
+
 
     @Autowired
     Repository repository;
@@ -81,7 +83,8 @@ public class PsrserExel {
         // наполнение репозитория - значений массивов
         System.out.println("Значения первой строки - Знаменитости:");
         for (String odinIz : znamenytostyS1PoMax) {
-            Znamenitost znamenitost = new Znamenitost(odinIz);
+            Znamenitost znamenitost = new Znamenitost(odinIz, idZnamenitostyTemp);
+            idZnamenitostyTemp++;
             //парсим вопрсы
 
           znamenitost.setOtvetyList(poluchitNaKonkretnogo(sheet));
@@ -105,6 +108,8 @@ public class PsrserExel {
                 repository.setZnamenitostList(znamenitostList);
                 repository.setVoprosList(voprosyLst);
 
+
+                idZnamenitostyTemp = 1;
 
                 workbook.close();
                 file.close();

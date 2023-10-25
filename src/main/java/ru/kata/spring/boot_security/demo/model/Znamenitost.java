@@ -42,8 +42,9 @@ public class Znamenitost {
     public Znamenitost() {
     }
 
-    public Znamenitost(String name) {
+    public Znamenitost(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
     public List<Vopros> getOtvetyList() {

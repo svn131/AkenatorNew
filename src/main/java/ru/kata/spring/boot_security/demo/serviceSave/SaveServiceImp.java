@@ -72,6 +72,7 @@ public class SaveServiceImp implements SaveService {
                 .count();
 
         if (count >= colSovpadenyiDlyaZameny) {
+            System.out.println("Zapisssssssssssssssssssssssssssssssssssssssssssssssssss");
             ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", znamenitostId, voprosId, String.valueOf(otvet));
 
             listSomnenyi.removeIf(num -> num == voprosId); // todo интерестный   метод
