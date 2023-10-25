@@ -61,11 +61,18 @@ async function answerNo() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
+    if (voprosId === 5000) {
+        console.log('tttttttttttuuuuut');
+        window.location.href = "http://85.116.125.155:8080/myProject";
+    }
     // $('#vopros-value').text(data.value);
     $('#vopros-value').empty().append(data.value);
 
-    console.log(data);
+
+
+    console.log('dataNo');
 }
 
 async function sendData() {
@@ -80,8 +87,15 @@ async function sendData() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
     $('#vopros-value').empty().append(data.value);
 
-    console.log(data);
+    console.log('dataaa');
+
+    if (voprosId === 5000) {
+        console.log('tttttttttttuuuuut');
+        window.location.href = "http://85.116.125.155:8080/myProject";
+    }
+
 }

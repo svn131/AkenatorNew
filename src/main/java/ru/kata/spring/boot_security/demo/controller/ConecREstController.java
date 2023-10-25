@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.serviceSave.SaveService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -103,20 +104,51 @@ public class ConecREstController {
 
     @PostMapping("no")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> no(@RequestBody Map<String, String> requestBody) {
+    public ResponseEntity<Vopros> no(@RequestBody Map<String, String> requestBody, HttpServletRequest request,HttpServletResponse response) throws IOException {
         String userInput = requestBody.get("input"); // Получение переданного текста
 
 
         System.out.println("MFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFV");
         System.out.println(userInput);
 
+        String sessionIda = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionIda = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- " + sessionIda);
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+        Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+
+
+        Vopros vopros = new Vopros();
+
+
 
         if (saveService.poisk(userInput)) {
 
             System.out.println("22222222222");
+            saveService.pometkaVoprosov(userInput,igrok);
+            userService.removeIgrok(igrok);
+
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
 
 
         }
-        return ResponseEntity.ok().build();
+
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        return ResponseEntity.ok(vopros);
     }
 }

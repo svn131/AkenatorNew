@@ -35,6 +35,7 @@ public class UserServiceImp implements UserService {
 
     public void removeIgrok(Igrok igrok){
         repository.getListIgrokov().remove(igrok);
+        System.out.println("RRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEMMMMMMMMMMMMOOOOOOOOOOOOVVVVVVVVVVVVVEEEEEEEEE");
 
     }
 
