@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
+import ru.kata.spring.boot_security.demo.model.Znamenitost;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.servlet.http.Cookie;
@@ -61,6 +62,10 @@ public class UserRestController {
         Igrok igrok = userService.getNewIgrok(sessionId);
         Vopros vopros = userService.getPriorityVopros(igrok,2);
 
+
+        for(Znamenitost znamenitost :igrok.getListVozmohnyhVariantov()){
+            System.out.println(znamenitost);
+        }
 
 //        igrok.setZaddanyiVopros(vopros.getId());
 
@@ -117,6 +122,12 @@ public class UserRestController {
 
         Vopros vopros = userService.getPriorityVopros(igrok,1);
 
+
+
+
+        for(Znamenitost znamenitost :igrok.getListVozmohnyhVariantov()){
+            System.out.println(znamenitost);
+        }
 
             // Выполнение редиректа на другую страницу
 //            throw new NotLoggedInException("please log in", "/ugadal");

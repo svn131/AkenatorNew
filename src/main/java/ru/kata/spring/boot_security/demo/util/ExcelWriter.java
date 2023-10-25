@@ -10,8 +10,7 @@ import java.io.IOException;
 public class ExcelWriter {
 
 
-
-    public static void writeCellValue(String filePath, int rowIndex, int columnIndex, String value) throws IOException {
+    public static void writeCellValue(String filePath, int rowIndex, int columnIndex, int value) throws IOException {
         FileInputStream file = new FileInputStream(filePath);
         Workbook workbook = new XSSFWorkbook(file);
         Sheet sheet = workbook.getSheetAt(0); // выбор первого листа
@@ -39,6 +38,5 @@ public class ExcelWriter {
         workbook.close();
         file.close();
     }
-
 }
 

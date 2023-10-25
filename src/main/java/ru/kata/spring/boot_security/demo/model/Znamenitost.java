@@ -81,6 +81,17 @@ public class Znamenitost {
     public void addListSomnenyi(Integer i) {
        listSomnenyi.add(i);
     }
+
+
+    @Override
+    public String toString() {
+        return "Znamenitost{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", otvetyList=" + otvetyList +
+                ", listSomnenyi=" + listSomnenyi +
+                '}';
+    }
 }
 
 

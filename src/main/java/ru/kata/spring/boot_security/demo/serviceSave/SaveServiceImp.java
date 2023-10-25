@@ -73,7 +73,18 @@ public class SaveServiceImp implements SaveService {
 
         if (count >= colSovpadenyiDlyaZameny) {
             System.out.println("Zapisssssssssssssssssssssssssssssssssssssssssssssssssss");
-            ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", znamenitostId, voprosId, String.valueOf(otvet));
+            ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", znamenitostId, voprosId, otvet);
+
+
+           for( Znamenitost znamenitost : repository.getZnamenitostList()){
+              if (znamenitost.getId() == znamenitostId){
+                  for(Vopros vopros : znamenitost.getOtvetyList()){ //todo для замены в рантайме
+                      if(voprosId == vopros.getId()){
+                          vopros.setOtvet(otvet);
+                      }
+                  }
+               }
+           }
 
             listSomnenyi.removeIf(num -> num == voprosId); // todo интерестный   метод
 
