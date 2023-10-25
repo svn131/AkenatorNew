@@ -63,10 +63,7 @@ async function answerNo() {
     const data = await response.json();
     voprosId = data.id;
 
-    if (voprosId === 5000) {
-        console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/myProject";
-    }
+
     // $('#vopros-value').text(data.value);
     $('#vopros-value').empty().append(data.value);
 
@@ -96,6 +93,9 @@ async function sendData() {
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
         window.location.href = "http://85.116.125.155:8080/myProject";
+    }else if (voprosId === 5005){
+        console.log('tttttttttttuuuuut5005');
+        window.location.href = "http://85.116.125.155:8080/newSuhnost";
     }
 
 }

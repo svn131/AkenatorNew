@@ -142,6 +142,13 @@ public class ConecREstController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
+        }else {
+            System.out.println("4444444444444");
+//            saveService.pometkaVoprosov(userInput,igrok);
+            userService.removeIgrok(igrok);
+
+            vopros.setId(5005);
+            vopros.setValue("nooo");
 
 
         }
