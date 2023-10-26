@@ -124,7 +124,7 @@ public class ConecREstController {
 
         }
 
-        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+        System.out.println("2GEEEEEEEEEEEEEEEETneugadal " + sessionIda);
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
@@ -144,9 +144,10 @@ public class ConecREstController {
 
         }else {
             System.out.println("4444444444444");
-//            saveService.pometkaVoprosov(userInput,igrok);
-            userService.removeIgrok(igrok);
 
+           igrok.setZnamenitostDobalenya(saveService.getnewZarodysh(igrok,userInput));
+
+//            userService.removeIgrok(igrok);
             vopros.setId(5005);
             vopros.setValue("nooo");
 

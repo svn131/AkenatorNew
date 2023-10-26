@@ -13,6 +13,11 @@ public class Igrok {
 
     List<Vopros>  listPamyty = new ArrayList<>();
 
+    Znamenitost znamenitostDobalenya; //todo дбавить в сущнось зародыш
+    List<Vopros>  listVoprosovDlyaDobavlenyya; //todo дбавить в сущнось зародыш
+    int schetchikDobavlenyh = 0; //todo дбавить в сущнось зародыш
+
+
 
     public Igrok(String idKuki, List<Znamenitost> listVozmohnyhVariantov, List<Vopros> listOstavshihsyaVoprosov) {
         this.idKuki = idKuki;
@@ -61,17 +66,53 @@ public class Igrok {
         listPamyty.add(vopros);
     }
 
+
+    public Znamenitost getZnamenitostDobalenya() {
+        return znamenitostDobalenya;
+    }
+
+    public void setZnamenitostDobalenya(Znamenitost znamenitostDobalenya) {
+        this.znamenitostDobalenya = znamenitostDobalenya;
+    }
+
+
+    public List<Vopros> getListVoprosovDlyaDobavlenyya() {
+        return listVoprosovDlyaDobavlenyya;
+    }
+
+    public void setListVoprosovDlyaDobavlenyya(List<Vopros> listVoprosovDlyaDobavlenyya) {
+        this.listVoprosovDlyaDobavlenyya = listVoprosovDlyaDobavlenyya;
+    }
+
+    public int getSchetchikDobavlenyh() {
+        return schetchikDobavlenyh;
+    }
+
+    public void incrimentSchetchikDobavlenyh() {
+        this.schetchikDobavlenyh++;
+    }
+
     @Override
     public String toString() {
         return "Igrok{" +
                 "idKuki='" + idKuki + '\'' +
                 ", listVozmohnyhVariantov=" + listVozmohnyhVariantov +
                 ", listOstavshihsyaVoprosov=" + listOstavshihsyaVoprosov +
+                ", listPamyty=" + listPamyty +
+                ", znamenitostDobalenya=" + znamenitostDobalenya +
+                ", listVoprosovDlyaDobavlenyya=" + listVoprosovDlyaDobavlenyya +
+                ", schetchikDobavlenyh=" + schetchikDobavlenyh +
                 ", regimNapolnitel=" + regimNapolnitel +
                 '}';
     }
 
-
-
-
+    public String toStringdebugsave() {
+        return "Igrok{" +
+                "idKuki='" + idKuki + '\'' +
+                ", listPamyty=" + listPamyty +
+                ", znamenitostDobalenya=" + znamenitostDobalenya +
+                ", listVoprosovDlyaDobavlenyya=" + listVoprosovDlyaDobavlenyya +
+                ", schetchikDobavlenyh=" + schetchikDobavlenyh +
+                '}';
+    }
 }

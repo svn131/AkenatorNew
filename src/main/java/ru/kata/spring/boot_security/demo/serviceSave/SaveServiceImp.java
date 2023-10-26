@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.model.Znamenitost;
 import ru.kata.spring.boot_security.demo.repository.Repository;
+import ru.kata.spring.boot_security.demo.repository.RepositoryZarodyshey;
 import ru.kata.spring.boot_security.demo.util.ExcelWriter;
 
 import java.io.IOException;
@@ -17,12 +18,20 @@ import java.util.stream.Collectors;
 @Service
 public class SaveServiceImp implements SaveService {
 
+    private RepositoryZarodyshey repositoryZarodyshey;
+
     private Repository repository;
 
     int colSovpadenyiDlyaZameny = 2;
 
+    int colVoprosovNaNovoeDobavlenye = 2;
+
+
+    double percentage = 1.0; // 0.8 = 80% процент при котором выходит в продакшен
+
     @Autowired
-    public SaveServiceImp(Repository userRepository) {
+    public SaveServiceImp(Repository userRepository, RepositoryZarodyshey repositoryZarodyshey) {
+        this.repositoryZarodyshey = repositoryZarodyshey;
         this.repository = userRepository;
     }
 
@@ -55,7 +64,7 @@ public class SaveServiceImp implements SaveService {
                 if (voprosPamyty.getId() == vopros.getId()) {
                     if (vopros.getOtvet() != voprosPamyty.getOtvet() && voprosPamyty.getOtvet() != 0) {
                         listSomnenyi.add(vopros.getId());
-                        nePoraliZapisat((ArrayList<Integer>) listSomnenyi,idZnamenitosty,voprosPamyty.getId(),voprosPamyty.getOtvet());
+                        nePoraliZapisat((ArrayList<Integer>) listSomnenyi, idZnamenitosty, voprosPamyty.getId(), voprosPamyty.getOtvet());
                     } //todo ненадо оправдания в случае нормальных резултов и так поменяеться е стоит утежелять логику
                 }
             }
@@ -76,15 +85,15 @@ public class SaveServiceImp implements SaveService {
             ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", znamenitostId, voprosId, otvet);
 
 
-           for( Znamenitost znamenitost : repository.getZnamenitostList()){
-              if (znamenitost.getId() == znamenitostId){
-                  for(Vopros vopros : znamenitost.getOtvetyList()){ //todo для замены в рантайме
-                      if(voprosId == vopros.getId()){
-                          vopros.setOtvet(otvet);
-                      }
-                  }
-               }
-           }
+            for (Znamenitost znamenitost : repository.getZnamenitostList()) {
+                if (znamenitost.getId() == znamenitostId) {
+                    for (Vopros vopros : znamenitost.getOtvetyList()) { //todo для замены в рантайме
+                        if (voprosId == vopros.getId()) {
+                            vopros.setOtvet(otvet);
+                        }
+                    }
+                }
+            }
 
             listSomnenyi.removeIf(num -> num == voprosId); // todo интерестный   метод
 
@@ -92,7 +101,147 @@ public class SaveServiceImp implements SaveService {
         }
 
 
+    }
+
+
+    public Znamenitost getnewZarodysh(Igrok igrok, String vveli) {
+        List<Znamenitost> zarodishList = repositoryZarodyshey.getZarodishList();
+
+
+        if (zarodishList != null) {
+            for (Znamenitost znamenitost : zarodishList) {
+                if (znamenitost.getName().equalsIgnoreCase(vveli)) {
+                    reformaVoprosovDobavki(igrok);
+                    return znamenitost;
+                }
+            }
+        }
+        Znamenitost znamenitost1 = new Znamenitost();
+        znamenitost1.setOtvetyList(igrok.getListPamyty()); //todo проверить не перетираеться ли после игрока ремув
+        znamenitost1.setName(vveli);
+        znamenitost1.setId(repository.getZnamenitosty().size() + 1);
+
+        reformaVoprosovDobavki(igrok);
+        return znamenitost1;
+
 
     }
+
+
+    public void reformaVoprosovDobavki(Igrok igrok) {
+
+        igrok .setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
+
+
+        for (Vopros vopros : repository.getVoprosList()) {
+            boolean isContained = false;
+            for (Vopros vopros1 : igrok.getListPamyty()) {
+                if (vopros.getId() == vopros1.getId()) {
+                    isContained = true;
+                    break;
+                }
+            }
+
+            if (!isContained) {
+                igrok.getListVoprosovDlyaDobavlenyya().add(vopros);
+            }
+        }
+    }
+
+
+    public Vopros getRandowVopros(Igrok igrok) throws IOException {
+        if (igrok.getListVoprosovDlyaDobavlenyya().size() > 0 && igrok.getSchetchikDobavlenyh() <= colVoprosovNaNovoeDobavlenye) {
+            Vopros vopros = igrok.getListVoprosovDlyaDobavlenyya().get(0);
+            igrok.incrimentSchetchikDobavlenyh();
+            return vopros;
+        } else {
+            Vopros vopros = new Vopros();
+            vopros.setId(7007);
+            vopros.setValue("7007");
+            dobavlinyaZaradishaVrepo(igrok);
+            proverkaAndWrite(igrok);
+            removeIgrok(igrok);
+
+            return vopros;
+        }
+
+
+    }
+
+    public void coretirovkaListVoposovDobalenyia(Igrok igrok){
+      List<Vopros> otvetListZDD = igrok.getZnamenitostDobalenya().getOtvetyList();
+        List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();
+
+       int fixBagVopros = otvetListZDD.size()-1;
+
+        listDlyDobVpros.add(otvetListZDD.get(fixBagVopros));
+       otvetListZDD.remove(fixBagVopros);
+    }
+
+
+    public void setZadanyiVopros(Igrok igrok, int otvet) {
+        Vopros vopros = igrok.getListVoprosovDlyaDobavlenyya().get(0);
+        vopros.setOtvet(otvet);
+        igrok.getListVoprosovDlyaDobavlenyya().remove(0);
+        igrok.getZnamenitostDobalenya().getOtvetyList().add(vopros);
+
+        igrok.incrimentSchetchikDobavlenyh();
+
+    }
+
+
+    public void dobavlinyaZaradishaVrepo(Igrok igrok) {
+
+        List<Znamenitost> zarodishList = repositoryZarodyshey.getZarodishList();
+
+        if (zarodishList != null) {
+            for (Znamenitost znamenitost : zarodishList) {
+                if (znamenitost.getId() == igrok.getZnamenitostDobalenya().getId()) {
+                    znamenitost = igrok.getZnamenitostDobalenya();
+                    return;
+                }
+            }
+
+        }
+        zarodishList.add(igrok.getZnamenitostDobalenya());
+
+    }
+
+
+    public  void proverkaAndWrite(Igrok igrok) throws IOException {
+      int uIgoka =  igrok.getZnamenitostDobalenya().getOtvetyList().size();
+      int vRepo = repository.getVoprosList().size();
+
+        double threshold = vRepo * percentage;
+
+        if (uIgoka >= threshold) {
+            // код, который должен сработать при заполненности 80%
+
+            Znamenitost znamenitost = igrok.getZnamenitostDobalenya();
+
+            repository.getZnamenitostList().add(znamenitost);
+
+          String name =  znamenitost.getName();
+
+         int pisatV = repository.getZnamenitostList().size()+1;
+
+         ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", pisatV, 0, name);
+
+
+
+        }
+
+
+    }
+
+
+    public void removeIgrok(Igrok igrok){
+        repository.getListIgrokov().remove(igrok);
+        System.out.println("RRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEMMMMMMMMMMMMOOOOOOOOOOOOVVVVVVVVVVVVVEEEEEEEEE");
+
+    }
+
+
+
 
 }
