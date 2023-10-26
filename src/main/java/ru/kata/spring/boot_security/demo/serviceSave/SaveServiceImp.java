@@ -24,7 +24,7 @@ public class SaveServiceImp implements SaveService {
 
     int colSovpadenyiDlyaZameny = 2;
 
-    int colVoprosovNaNovoeDobavlenye = 2;
+    int colVoprosovNaNovoeDobavlenye = 1;
 
 
     double percentage = 1.0; // 0.8 = 80% процент при котором выходит в продакшен
@@ -150,7 +150,7 @@ public class SaveServiceImp implements SaveService {
 
 
     public Vopros getRandowVopros(Igrok igrok) throws IOException {
-        if (igrok.getListVoprosovDlyaDobavlenyya().size() > 0 && igrok.getSchetchikDobavlenyh() <= colVoprosovNaNovoeDobavlenye) {
+        if (igrok.getListVoprosovDlyaDobavlenyya().size() > 0 && igrok.getSchetchikDobavlenyh() <= colVoprosovNaNovoeDobavlenye+1) {
             Vopros vopros = igrok.getListVoprosovDlyaDobavlenyya().get(0);
             igrok.incrimentSchetchikDobavlenyh();
             return vopros;
@@ -174,7 +174,11 @@ public class SaveServiceImp implements SaveService {
 
        int fixBagVopros = otvetListZDD.size()-1;
 
-        listDlyDobVpros.add(otvetListZDD.get(fixBagVopros));
+       Vopros vopros = otvetListZDD.get(fixBagVopros);
+       Vopros voprosNew = repository.getVoprosList().get(vopros.getId()-1);
+       vopros.setValue(voprosNew.getValue());
+
+        listDlyDobVpros.add(vopros);
        otvetListZDD.remove(fixBagVopros);
     }
 
