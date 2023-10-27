@@ -11,7 +11,8 @@ public interface UserService  {
 
     public Repository getRepository();
 
-    public Vopros getPriorityVopros(Igrok igrok,int vibor);
+    public Vopros getPriorityVopros(Igrok igrok);
+    public void setNazadanyiRaneeVoprosVLP( Igrok igrok,int vibor);
 
     public Igrok getNewIgrok (String kukiId);
 

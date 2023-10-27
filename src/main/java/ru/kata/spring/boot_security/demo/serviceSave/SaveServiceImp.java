@@ -13,7 +13,6 @@ import ru.kata.spring.boot_security.demo.util.ExcelWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SaveServiceImp implements SaveService {
@@ -109,10 +108,10 @@ public class SaveServiceImp implements SaveService {
 
 
         if (zarodishList != null) {
-            for (Znamenitost znamenitost : zarodishList) {
-                if (znamenitost.getName().equalsIgnoreCase(vveli)) {
-                    reformaVoprosovDobavki(igrok);
-                    return znamenitost;
+            for (Znamenitost zarodysh : zarodishList) {
+                if (zarodysh.getName().equalsIgnoreCase(vveli)) {
+                    napolnenyerVoprosovDobavkiEslyESTZarodysh(igrok,zarodysh);
+                    return zarodysh;
                 }
             }
         }
@@ -121,17 +120,40 @@ public class SaveServiceImp implements SaveService {
         znamenitost1.setName(vveli);
         znamenitost1.setId(repository.getZnamenitosty().size() + 1);
 
-        reformaVoprosovDobavki(igrok);
+        napolnenyerVoprosovDobavkiEslyNEtZarodysha(igrok);
         return znamenitost1;
 
 
     }
 
+    public void napolnenyerVoprosovDobavkiEslyESTZarodysh(Igrok igrok,Znamenitost zarodish){
+        igrok .setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
+        List<Vopros> listVDDuIgroka  = igrok.getListVoprosovDlyaDobavlenyya();
+        List<Vopros> voprosListZaroddysh =  zarodish.getOtvetyList();
 
-    public void reformaVoprosovDobavki(Igrok igrok) {
+        voprosListZaroddysh.addAll(igrok.getListPamyty());
+
+        for (Vopros vopros : repository.getVoprosList()) {
+            boolean isContained = false;
+            for (Vopros vopros1 : voprosListZaroddysh) {
+                if (vopros.getId() == vopros1.getId()) {
+                    isContained = true;
+                    break;
+                }
+            }
+
+            if (!isContained) {
+                listVDDuIgroka.add(vopros);
+            }
+        }
+    }
+
+
+
+
+    public void napolnenyerVoprosovDobavkiEslyNEtZarodysha(Igrok igrok) {
 
         igrok .setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
-
 
         for (Vopros vopros : repository.getVoprosList()) {
             boolean isContained = false;

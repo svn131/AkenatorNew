@@ -60,7 +60,7 @@ public class UserRestController {
 //        vopros.setId(2);
 //        vopros.setValue("valyyy kyk" + sessionId);
         Igrok igrok = userService.getNewIgrok(sessionId);
-        Vopros vopros = userService.getPriorityVopros(igrok,2);
+        Vopros vopros = userService.getPriorityVopros(igrok);
 
 
         for(Znamenitost znamenitost :igrok.getListVozmohnyhVariantov()){
@@ -135,11 +135,12 @@ public class UserRestController {
 //
 
         if(ostalos>1){
-           vopros = userService.getPriorityVopros(igrok,1);
+            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
+           vopros = userService.getPriorityVopros(igrok);
         }
 
         else if (ostalos == 1) {
-
+            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
@@ -149,6 +150,7 @@ public class UserRestController {
 
         }
         else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
             vopros = new Vopros();
             vopros.setId(5001);
             vopros.setValue("Yes");

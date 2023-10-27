@@ -126,12 +126,14 @@ public class UserServiceImp implements UserService {
         }
     }
 
-    public Vopros getPriorityVopros(Igrok igrok, int vibor) { // todo упростить сушноси добавив ответы
-
+    public void setNazadanyiRaneeVoprosVLP( Igrok igrok,int vibor){
         if(igrok.getListPamyty().size() != 0){
             igrok.getListPamyty().get(igrok.getListPamyty().size()-1).setOtvet(vibor); // логим
         }
+    }
 
+
+    public Vopros getPriorityVopros(Igrok igrok) { // todo упростить сушноси добавив ответы
 
 
         for (Znamenitost znamenytost : igrok.getListVozmohnyhVariantov()) {
