@@ -62,9 +62,12 @@ public class DobavkaRestController {
         }
 
 
+
+
         Igrok igrok = userService.getIgrok(sessionId);
 
-//        saveService.coretirovkaListVoposovDobalenyia(igrok); // todo fixBaga
+//       saveService.umenshenyeVoprosEslivZarodysheUgheEst(igrok);
+
 
        Vopros vopros = saveService.getRandowVopros(igrok);
 

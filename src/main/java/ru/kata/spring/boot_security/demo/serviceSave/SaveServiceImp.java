@@ -13,6 +13,8 @@ import ru.kata.spring.boot_security.demo.util.ExcelWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class SaveServiceImp implements SaveService {
@@ -131,11 +133,16 @@ public class SaveServiceImp implements SaveService {
         List<Vopros> listVDDuIgroka  = igrok.getListVoprosovDlyaDobavlenyya();
         List<Vopros> voprosListZaroddysh =  zarodish.getOtvetyList();
 
-        voprosListZaroddysh.addAll(igrok.getListPamyty());
+//        voprosListZaroddysh.addAll(igrok.getListPamyty());
+
+
+        List<Vopros> voprosListZaroddyshRess = Stream.concat(igrok.getListPamyty().stream(), voprosListZaroddysh.stream())
+                .distinct()
+                .collect(Collectors.toList());
 
         for (Vopros vopros : repository.getVoprosList()) {
             boolean isContained = false;
-            for (Vopros vopros1 : voprosListZaroddysh) {
+            for (Vopros vopros1 : voprosListZaroddyshRess) {
                 if (vopros.getId() == vopros1.getId()) {
                     isContained = true;
                     break;
@@ -238,9 +245,16 @@ public class SaveServiceImp implements SaveService {
 
           String name =  znamenitost.getName();
 
-         int pisatV = repository.getZnamenitostList().size()+1;
+         int pisatV = repository.getZnamenitostList().size();
 
-         ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", pisatV, 0, name);
+
+          List<Vopros> listItvetov =  igrok.getZnamenitostDobalenya().getOtvetyList();
+
+
+
+
+
+         ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", pisatV, 0, name, listItvetov);
 
 
 
@@ -256,21 +270,7 @@ public class SaveServiceImp implements SaveService {
 
     }
 
-    public void coretirovkaListVoposovDobalenyia(Igrok igrok){
-        List<Vopros> otvetListZDD = igrok.getZnamenitostDobalenya().getOtvetyList();
-        List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();
 
-        int fixBagVopros = otvetListZDD.size()-1;
-
-        Vopros vopros = otvetListZDD.get(fixBagVopros);
-        Vopros voprosNew = repository.getVoprosList().get(vopros.getId()-1);
-        vopros.setValue(voprosNew.getValue());
-
-        listDlyDobVpros.add(vopros);
-        otvetListZDD.remove(fixBagVopros); // todo при повторном круг плохо делает.
-
-        umenshenyeVoprosEslivZarodysheUgheEst(igrok);
-    }
 
     public void umenshenyeVoprosEslivZarodysheUgheEst(Igrok igrok) {
         List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();

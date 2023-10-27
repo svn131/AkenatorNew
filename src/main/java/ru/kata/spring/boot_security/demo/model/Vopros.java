@@ -103,24 +103,7 @@ public class Vopros implements Comparable<Vopros> {
     }
 
 
-//    @Override
-//    public int compareTo(Vopros vo) {
-//        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {
-//            // Если оба объекта имеют countMinus1 > count1, сравниваем по count1
-//            return Integer.compare(this.count1, vo.count1);
-//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 <= vo.count1) {
-//            // Если оба объекта имеют countMinus1 <= count1, сравниваем по countMinus1
-//            return Integer.compare(this.countMinus1, vo.countMinus1);
-//        } else if (this.countMinus1 > this.count1 && vo.count1 > vo.countMinus1) {
-//            // Сравниваем countMinus1 с count1
-//            return Integer.compare(this.countMinus1, vo.count1);
-//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 > vo.count1) {
-//            // Сравниваем count1 с countMinus1
-//            return Integer.compare(this.count1, vo.countMinus1);
-//        }
-//
-//        return 0;
-//    }
+
 
 
 
@@ -161,3 +144,23 @@ public class Vopros implements Comparable<Vopros> {
 //                return Integer.compare(this.count1, vo.countMinus1);
 //
 //                }
+
+
+//    @Override
+//    public int compareTo(Vopros vo) {
+//        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {
+//            // Если оба объекта имеют countMinus1 > count1, сравниваем по count1
+//            return Integer.compare(this.count1, vo.count1);
+//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 <= vo.count1) {
+//            // Если оба объекта имеют countMinus1 <= count1, сравниваем по countMinus1
+//            return Integer.compare(this.countMinus1, vo.countMinus1);
+//        } else if (this.countMinus1 > this.count1 && vo.count1 > vo.countMinus1) {
+//            // Сравниваем countMinus1 с count1
+//            return Integer.compare(this.countMinus1, vo.count1);
+//        } else if (this.countMinus1 <= this.count1 && vo.countMinus1 > vo.count1) {
+//            // Сравниваем count1 с countMinus1
+//            return Integer.compare(this.count1, vo.countMinus1);
+//        }
+//
+//        return 0;
+//    }

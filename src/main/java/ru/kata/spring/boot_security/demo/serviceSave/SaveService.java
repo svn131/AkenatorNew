@@ -18,7 +18,7 @@ public interface SaveService {
 
     public void setZadanyiVopros(Igrok igrok ,int otvet);
 
-    public void coretirovkaListVoposovDobalenyia(Igrok igrok);
+    public  void umenshenyeVoprosEslivZarodysheUgheEst(Igrok igrok);
 
 
 
