@@ -120,7 +120,7 @@ public class UserRestController {
 
        int ostalos = igrok.getListVozmohnyhVariantov().size();
 
-        Vopros vopros = userService.getPriorityVopros(igrok,1);
+        Vopros vopros = new Vopros();
 
 
 
@@ -133,7 +133,12 @@ public class UserRestController {
 //            throw new NotLoggedInException("please log in", "/ugadal");
 
 //
-        if (ostalos == 1) {
+
+        if(ostalos>1){
+           vopros = userService.getPriorityVopros(igrok,1);
+        }
+
+        else if (ostalos == 1) {
 
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");

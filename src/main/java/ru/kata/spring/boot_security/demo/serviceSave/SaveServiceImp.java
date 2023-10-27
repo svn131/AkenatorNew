@@ -168,19 +168,7 @@ public class SaveServiceImp implements SaveService {
 
     }
 
-    public void coretirovkaListVoposovDobalenyia(Igrok igrok){
-      List<Vopros> otvetListZDD = igrok.getZnamenitostDobalenya().getOtvetyList();
-        List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();
 
-       int fixBagVopros = otvetListZDD.size()-1;
-
-       Vopros vopros = otvetListZDD.get(fixBagVopros);
-       Vopros voprosNew = repository.getVoprosList().get(vopros.getId()-1);
-       vopros.setValue(voprosNew.getValue());
-
-        listDlyDobVpros.add(vopros);
-       otvetListZDD.remove(fixBagVopros);
-    }
 
 
     public void setZadanyiVopros(Igrok igrok, int otvet) {
@@ -245,7 +233,40 @@ public class SaveServiceImp implements SaveService {
 
     }
 
+    public void coretirovkaListVoposovDobalenyia(Igrok igrok){
+        List<Vopros> otvetListZDD = igrok.getZnamenitostDobalenya().getOtvetyList();
+        List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();
+
+        int fixBagVopros = otvetListZDD.size()-1;
+
+        Vopros vopros = otvetListZDD.get(fixBagVopros);
+        Vopros voprosNew = repository.getVoprosList().get(vopros.getId()-1);
+        vopros.setValue(voprosNew.getValue());
+
+        listDlyDobVpros.add(vopros);
+        otvetListZDD.remove(fixBagVopros); // todo при повторном круг плохо делает.
+
+        umenshenyeVoprosEslivZarodysheUgheEst(igrok);
+    }
+
+    public void umenshenyeVoprosEslivZarodysheUgheEst(Igrok igrok) {
+        List<Vopros> listDlyDobVpros = igrok.getListVoprosovDlyaDobavlenyya();
+        Znamenitost znamenitostDD = igrok.getZnamenitostDobalenya();
+
+        List<Znamenitost> zarodyshList = repositoryZarodyshey.getZarodishList();
+
+        for (Znamenitost zarodysh : zarodyshList) {
+            if (zarodysh.getName().equals(znamenitostDD.getName())) {
+                //стираем из лсита вопрососв для добавления те которые уже есть в зродыше
+                List<Vopros> VoprosyKotoryeUgheByli = zarodysh.getOtvetyList();
+
+                for (Vopros vopros : VoprosyKotoryeUgheByli) {
+                    listDlyDobVpros.remove(vopros.getId() - 1);
+                }
 
 
+            }
+        }
+    }
 
 }
