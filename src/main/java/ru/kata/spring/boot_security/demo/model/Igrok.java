@@ -92,6 +92,10 @@ public class Igrok {
         this.schetchikDobavlenyh++;
     }
 
+    public void obnulenyeSchetchikDobavlenyh() {
+        schetchikDobavlenyh=0;
+    }
+
     @Override
     public String toString() {
         return "Igrok{" +

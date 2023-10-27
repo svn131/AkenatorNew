@@ -177,6 +177,7 @@ public class SaveServiceImp implements SaveService {
             igrok.incrimentSchetchikDobavlenyh();
             return vopros;
         } else {
+            igrok.obnulenyeSchetchikDobavlenyh();
             Vopros vopros = new Vopros();
             vopros.setId(7007);
             vopros.setValue("7007");
