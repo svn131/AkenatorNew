@@ -43,7 +43,7 @@ async function answerYes() {
 
     if (voprosId === 7007) {
         console.log('tttttttttttuuuuut7007');
-        window.location.href = "http://85.116.125.155:8080/myProject";
+        window.location.href = "http://85.116.125.155:8080/new_game";
     }
 
 
