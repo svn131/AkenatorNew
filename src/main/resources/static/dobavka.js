@@ -53,7 +53,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/no", {
+    const response = await fetch("http://85.116.125.155:8080/dobavka/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ async function answerNo() {
 }
 
 async function answerNone() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/nany", {
+    const response = await fetch("http://85.116.125.155:8080/dobavka/nany", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

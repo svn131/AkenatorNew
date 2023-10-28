@@ -1,8 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,7 @@ public class DobavkaRestController {
 
     private final UserService userService;
 
-    private  final SaveService saveService;
+    private final SaveService saveService;
 
     @Autowired
     public DobavkaRestController(UserService userService, SaveService saveService) {
@@ -52,16 +50,14 @@ public class DobavkaRestController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("session_id")) {
                     sessionId = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- "+ sessionId);
+                    System.out.println("кука first ---------------------------------- " + sessionId);
                     break;
                 }
             }
-        }else {
+        } else {
 
             sessionId = UUID.randomUUID().toString();
         }
-
-
 
 
         Igrok igrok = userService.getIgrok(sessionId);
@@ -69,13 +65,7 @@ public class DobavkaRestController {
 //       saveService.umenshenyeVoprosEslivZarodysheUgheEst(igrok);
 
 
-       Vopros vopros = saveService.getRandowVopros(igrok);
-
-
-
-
-
-
+        Vopros vopros = saveService.getRandowVopros(igrok);
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
@@ -111,12 +101,9 @@ public class DobavkaRestController {
 
         System.out.println(igrok.toStringdebugsave());
 //@todo последний вопрос из ответ лист ???
-        saveService.setZadanyiVopros(igrok,1);
+        saveService.setZadanyiVopros(igrok, 1);
 
-     Vopros vopros =  saveService.getRandowVopros(igrok);
-
-
-
+        Vopros vopros = saveService.getRandowVopros(igrok);
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
@@ -125,24 +112,80 @@ public class DobavkaRestController {
     }
 
 
+
+
+
+
+
     @PostMapping("no")
 //    @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> no() {
-        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-        Vopros vopros = new Vopros();
-        vopros.setId(3);
-        vopros.setValue("No");
+    public ResponseEntity<Vopros> no(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String sessionIda = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionIda = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- " + sessionIda);
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+        Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+
+        System.out.println(igrok.toStringdebugsave());
+//@todo последний вопрос из ответ лист ???
+        saveService.setZadanyiVopros(igrok, -1);
+
+        Vopros vopros = saveService.getRandowVopros(igrok);
+
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
         return ResponseEntity.ok(vopros);
     }
 
+
+
+
+
+
     @PostMapping("nany")
 //    @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> nany() {
-        System.out.println("7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77");
-        Vopros vopros = new Vopros();
-        vopros.setId(1);
-        vopros.setValue("Nany");
-        return ResponseEntity.ok(vopros);
+    public ResponseEntity<Vopros> nany(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String sessionIda = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("session_id")) {
+                        sessionIda = cookie.getValue();
+                        System.out.println("кука first ---------------------------------- " + sessionIda);
+                        break;
+                    }
+                }
+
+            }
+
+            System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+            Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+
+            System.out.println(igrok.toStringdebugsave());
+//@todo последний вопрос из ответ лист ???
+            saveService.setZadanyiVopros(igrok, 0);
+
+            Vopros vopros = saveService.getRandowVopros(igrok);
+
+
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+            response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+            return ResponseEntity.ok(vopros);
     }
 
     @PostMapping("/sesionnn")
