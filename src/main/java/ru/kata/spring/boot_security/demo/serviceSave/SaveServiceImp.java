@@ -25,7 +25,7 @@ public class SaveServiceImp implements SaveService {
 
     int colSovpadenyiDlyaZameny = 2;
 
-    int colVoprosovNaNovoeDobavlenye = 1;
+    int colVoprosovNaNovoeDobavlenye = 2; // можно ставить хоть 10000 выше головы не прыгнет всеравно
 
 
     double percentage = 1.0; // 0.8 = 80% процент при котором выходит в продакшен
@@ -179,7 +179,7 @@ public class SaveServiceImp implements SaveService {
 
 
     public Vopros getRandowVopros(Igrok igrok) throws IOException {
-        if (igrok.getListVoprosovDlyaDobavlenyya().size() > 0 && igrok.getSchetchikDobavlenyh() <= colVoprosovNaNovoeDobavlenye+1) {
+        if (igrok.getListVoprosovDlyaDobavlenyya().size() > 0 && igrok.getSchetchikDobavlenyh() <= colVoprosovNaNovoeDobavlenye) {
             Vopros vopros = igrok.getListVoprosovDlyaDobavlenyya().get(0);
             igrok.incrimentSchetchikDobavlenyh();
             return vopros;
