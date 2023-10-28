@@ -179,6 +179,8 @@ public class UserServiceImp implements UserService {
                     if (resultVopros.getId() == vopros.getId()) { // перебираем все вопросы - что бы знать статистику
                         if (vopros.getOtvet() == 1) {
                             resultVopros.incremetCount1();
+
+
                         } else if (vopros.getOtvet() == -1) {
 
                             System.out.println("----------------------------");
