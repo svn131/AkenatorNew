@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.repository;
 
 
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
@@ -18,7 +19,7 @@ public class Repository {
 
     List<Znamenitost> znamenitostList;
 
-    List<Igrok> listIgrokov = new ArrayList<>(); // todo не забыть убрать после вйгрыша
+    List<Igrok> listIgrokov = new ArrayList<>();
 
 
 
@@ -56,4 +57,11 @@ public class Repository {
     public void setListIgrokov(List<Igrok> listIgrokov) {
         this.listIgrokov = listIgrokov;
     }
+
+
+    @Scheduled(fixedRate = 86400000)  // Запускать каждые 24 часа (в миллисекундах)
+    public void obnovaMetod() {
+        // Код обновления данных в сущности Repository
+    }
+
 }
