@@ -1,9 +1,12 @@
+var BASEUUUUUURRRLLLL = "http://85.116.125.155:8080";
+
+
 $(async function () {
     await thisUser();
 });
 
 async function thisUser() {
-    const response = await fetch("http://85.116.125.155:8080/dobavka");
+    const response = await fetch(BASEUUUUUURRRLLLL + "/dobavka");
 
     const data = await response.json();
 
@@ -26,7 +29,7 @@ async function thisUser() {
 
 
 async function answerYes() {
-    const response = await fetch("http://85.116.125.155:8080/dobavka/yes", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/dobavka/yes", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -43,7 +46,7 @@ async function answerYes() {
 
     if (voprosId === 7007) {
         console.log('tttttttttttuuuuut7007');
-        window.location.href = "http://85.116.125.155:8080/new_game";
+        window.location.href = BASEUUUUUURRRLLLL + "/new_game";
     }
 
 
@@ -53,7 +56,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch("http://85.116.125.155:8080/dobavka/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/dobavka/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -70,12 +73,12 @@ async function answerNo() {
 
     if (voprosId === 7007) {
         console.log('tttttttttttuuuuut7007');
-        window.location.href = "http://85.116.125.155:8080/new_game";
+        window.location.href = BASEUUUUUURRRLLLL + "/new_game";
     }
 }
 
 async function answerNone() {
-    const response = await fetch("http://85.116.125.155:8080/dobavka/nany", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/dobavka/nany", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -91,6 +94,6 @@ async function answerNone() {
 
     if (voprosId === 7007) {
         console.log('tttttttttttuuuuut7007');
-        window.location.href = "http://85.116.125.155:8080/new_game";
+        window.location.href = BASEUUUUUURRRLLLL + "/new_game";
     }
 }

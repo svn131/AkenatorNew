@@ -1,9 +1,12 @@
+var BASEUUUUUURRRLLLL = "http://85.116.125.155:8080";
+
+
 $(async function () {
     await thisUser();
 });
 
 async function thisUser() {
-    const response = await fetch("http://85.116.125.155:8080/conec");
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conec");
 
     const data = await response.json();
 
@@ -27,7 +30,7 @@ async function thisUser() {
 
 
 async function answerYes() {
-    const response = await fetch("http://85.116.125.155:8080/conec/yes", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/yes", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -42,7 +45,7 @@ async function answerYes() {
 
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/myProject";
+        window.location.href = BASEUUUUUURRRLLLL + "/myProject";
     }
 
 
@@ -52,7 +55,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch("http://85.116.125.155:8080/conec/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -75,7 +78,7 @@ async function answerNo() {
 async function sendData() {
     const userInput = document.getElementById("userInput").value;
 
-    const response = await fetch("http://85.116.125.155:8080/conec/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -92,10 +95,10 @@ async function sendData() {
 
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/myProject";
+        window.location.href = BASEUUUUUURRRLLLL + "/myProject";
     }else if (voprosId === 5005){
         console.log('tttttttttttuuuuut5005');
-        window.location.href = "http://85.116.125.155:8080/newSuhnost";
+        window.location.href = BASEUUUUUURRRLLLL + "/newSuhnost";
     }
 
 }

@@ -1,9 +1,15 @@
+var BASEUUUUUURRRLLLL = "http://85.116.125.155:8080";
+
 $(async function () {
     await thisUser();
 });
 
 async function thisUser() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile");
+    // const response = await fetch("http://85.116.125.155:8080/userProfile");
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile");
+
+
+
     // const response = await fetch("http://85.116.125.155:8080/userProfile?" + Date.now());
 
     const data = await response.json();
@@ -14,7 +20,7 @@ async function thisUser() {
     $('#vopros-id').append(voprosId);
     $('#vopros-value').append(voprosValue);
 
-    // $("#vopros-image").attr("src", "images/" + data.id + ".jpg");
+
 
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
 
@@ -29,7 +35,7 @@ async function thisUser() {
 
 
 async function answerYes() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/yes", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/yes", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,11 +52,11 @@ async function answerYes() {
 
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/ugadal";
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadal";
     }
     if (voprosId === 5001) {
         console.log('tttttttttttuuuuuta');
-        window.location.href = "http://85.116.125.155:8080/neznayuChto";
+        window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
     }
 
 }
@@ -59,7 +65,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -76,16 +82,16 @@ async function answerNo() {
 
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/ugadal";
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadal";
     }
     if (voprosId === 5001) {
         console.log('tttttttttttuuuuuta');
-        window.location.href = "http://85.116.125.155:8080/neznayuChto";
+        window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
     }
 }
 
 async function answerNone() {
-    const response = await fetch("http://85.116.125.155:8080/userProfile/nany", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/nany", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -103,11 +109,11 @@ async function answerNone() {
 
     if (voprosId === 5000) {
         console.log('tttttttttttuuuuut');
-        window.location.href = "http://85.116.125.155:8080/ugadal";
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadal";
     }
     if (voprosId === 5001) {
         console.log('tttttttttttuuuuuta');
-        window.location.href = "http://85.116.125.155:8080/neznayuChto";
+        window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
     }
 
 
