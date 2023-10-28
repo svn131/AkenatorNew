@@ -168,6 +168,10 @@ public class UserServiceImp implements UserService {
 
     public Vopros getPriorityVopros(Igrok igrok) { // todo упростить сушноси добавив ответы
 
+        for (Vopros voprosDlyObnulenya : igrok.getListOstavshihsyaVoprosov()) {
+            voprosDlyObnulenya.nulableSet();
+        }
+
 
         for (Znamenitost znamenytost : igrok.getListVozmohnyhVariantov()) {
             for (Vopros vopros : znamenytost.getOtvetyList()) {
@@ -175,7 +179,7 @@ public class UserServiceImp implements UserService {
                     if (resultVopros.getId() == vopros.getId()) { // перебираем все вопросы - что бы знать статистику
                         if (vopros.getOtvet() == 1) {
                             resultVopros.incremetCount1();
-                        } else if (vopros.getOtvet() == -1) { // todo -11111111111111111111111111111 00000
+                        } else if (vopros.getOtvet() == -1) {
 
                             System.out.println("----------------------------");
                             System.out.println(resultVopros.getId() + "  " + vopros.getId());
@@ -210,6 +214,14 @@ public class UserServiceImp implements UserService {
     }
 
 
+
+
+//    public void obnulenyeCount(Igrok igrok){
+//
+//        for (Znamenitost znamenytost : igrok.getListVozmohnyhVariantov()) {
+//            for (Vopros vopros : znamenytost.getOtvetyList()) {
+//                for (Vopros resultVopros : igrok.getListOstavshihsyaVoprosov()) {
+//    }
 
 
 }

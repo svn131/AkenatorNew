@@ -140,4 +140,7 @@ public class Igrok {
     public int hashCode() {
         return Objects.hash(getIdKuki());
     }
+
+
+
 }

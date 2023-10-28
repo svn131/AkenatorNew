@@ -63,7 +63,7 @@ public class SaveServiceImp implements SaveService {
         for (Vopros voprosPamyty : igrok.getListPamyty()) {
             for (Vopros vopros : redactList) {
                 if (voprosPamyty.getId() == vopros.getId()) {
-                    if (vopros.getOtvet() != voprosPamyty.getOtvet() && voprosPamyty.getOtvet() != 0) {
+                    if (vopros.getOtvet() != voprosPamyty.getOtvet() && voprosPamyty.getOtvet() != 0) { //
                         listSomnenyi.add(vopros.getId());
                         nePoraliZapisat((ArrayList<Integer>) listSomnenyi, idZnamenitosty, voprosPamyty.getId(), voprosPamyty.getOtvet());
                     } //todo ненадо оправдания в случае нормальных резултов и так поменяеться е стоит утежелять логику
