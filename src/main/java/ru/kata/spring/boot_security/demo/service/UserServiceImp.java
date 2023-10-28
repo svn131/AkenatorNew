@@ -63,7 +63,7 @@ public class UserServiceImp implements UserService {
     @Override
     public Igrok reforma(Igrok igrok,int otvet) {
         int idVoprosa = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1).getId();
-        igrok.getListOstavshihsyaVoprosov().remove(igrok.getListOstavshihsyaVoprosov().size()-1);
+        igrok.getListOstavshihsyaVoprosov().remove(igrok.getListOstavshihsyaVoprosov().size()-1); // удаляет из игрокапойденый вопрос
 
         List<Znamenitost> znamenytostyNaIgru = igrok.getListVozmohnyhVariantov();
         List<Znamenitost> listResult = new ArrayList<>();
@@ -92,11 +92,9 @@ public class UserServiceImp implements UserService {
 
                 }
             }
-        }else { // todo eto esli 0 ne menyaetsya nechego
+        }else { // для 0 что бы удаляло пройденный вопрос
             return igrok;
-
         }
-
 
         igrok.setListVozmohnyhVariantov(listResult);
         return igrok;

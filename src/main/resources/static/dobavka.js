@@ -62,11 +62,16 @@ async function answerNo() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
     // $('#vopros-value').text(data.value);
     $('#vopros-value').empty().append(data.value);
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
-    console.log(data);
+
+    if (voprosId === 7007) {
+        console.log('tttttttttttuuuuut7007');
+        window.location.href = "http://85.116.125.155:8080/new_game";
+    }
 }
 
 async function answerNone() {
@@ -79,8 +84,13 @@ async function answerNone() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
     $('#vopros-value').text(data.value);
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
-    console.log(data);
+
+    if (voprosId === 7007) {
+        console.log('tttttttttttuuuuut7007');
+        window.location.href = "http://85.116.125.155:8080/new_game";
+    }
 }

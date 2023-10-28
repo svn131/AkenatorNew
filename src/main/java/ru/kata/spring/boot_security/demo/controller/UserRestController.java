@@ -217,7 +217,7 @@ userService.removeIgrok(sessionId);
 
     @PostMapping("nany")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> nany(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Vopros> nany(HttpServletRequest request, HttpServletResponse response) { //todo добавляем в лист памяти ??
         String sessionIda = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -237,27 +237,16 @@ userService.removeIgrok(sessionId);
         System.out.println(igrok.toString());
 
 
-        userService.reforma(igrok, 0);
+
+        userService.reforma(igrok,0);
+
+        userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+       Vopros vopros = userService.getPriorityVopros(igrok);
 
 
-        int ostalos = igrok.getListVozmohnyhVariantov().size();
-
-        Vopros vopros = new Vopros();
 
 
-        if (ostalos > 1) {
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
-            vopros = userService.getPriorityVopros(igrok);
-        } else if (ostalos == 1) {
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
-            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-
-            vopros = new Vopros();
-            vopros.setId(5000);
-            vopros.setValue("Yes");
-
-        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+         if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
             userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
             vopros = new Vopros();
             vopros.setId(5001);

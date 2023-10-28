@@ -1,12 +1,49 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Спасибо</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Большое спасибо</h1>-->
+<!--<form method="post" action="#" th:action="@{/}" th:object="${redirectController}">-->
+<!--  <button type="submit">Сыграем еще?</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Спасибо</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
 <h1>Большое спасибо</h1>
 <form method="post" action="#" th:action="@{/}" th:object="${redirectController}">
-  <button type="submit">Сыграем еще?</button>
+  <button class="button" type="submit">Сыграем еще?</button>
 </form>
 </body>
 </html>
