@@ -144,4 +144,10 @@ public class PsrserExel {
         return otvetyDlyaOndnogo;
 
     }
+
+
+
+
+//    public void checidDvoinik()//todo долгая x2x2x2x2 проблема - проще отдельный модуль написать c картинками
+
 }

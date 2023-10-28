@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.util.PsrserExel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -74,12 +75,28 @@ public class UserServiceImp implements UserService {
 
                 }
             }
+        }else { // todo eto esli 0 ne menyaetsya nechego
+            return igrok;
+
         }
 
 
         igrok.setListVozmohnyhVariantov(listResult);
         return igrok;
     }
+
+   public void setDovoprosaChekNaDooble(Igrok igrok){ /////////////////////////////////////////////////////////////////////////////////////////////////////todo обращать внимание
+        igrok.sizeDoVoprosa = igrok.getListVozmohnyhVariantov().size();
+   }
+
+    @Override
+    public boolean checkPosleVoprosa(Igrok igrok) { // если знаменитосей не уменьшилось значит приоретеный вопрос не смог нечего изменить все остальное одинаково или имеет нули .
+        return igrok.sizeDoVoprosa == igrok.getListVozmohnyhVariantov().size();
+    }
+
+
+
+
 
     public Igrok getIgrok(String kukiId){
       for(Igrok igrok :  repository.getListIgrokov()){
@@ -176,6 +193,8 @@ public class UserServiceImp implements UserService {
         return igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1); // todo проверить самый путевый это 0 или последний ??
 
     }
+
+
 
 
 }

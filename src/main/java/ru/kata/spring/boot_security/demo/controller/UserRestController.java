@@ -45,33 +45,28 @@ public class UserRestController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("session_id")) {
                     sessionId = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- "+ sessionId);
+                    System.out.println("кука first ---------------------------------- " + sessionId);
                     break;
                 }
             }
-        }else {
-        // Генерируем уникальный идентификатор для сессии
-//            sessionId = new String();
-        sessionId = UUID.randomUUID().toString();
+        } else {
+            // Генерируем уникальный идентификатор для сессии
+
+            sessionId = UUID.randomUUID().toString();
         }
-//
-//         Создаем объект Vopros с id и value
-//        Vopros vopros = new Vopros();
-//        vopros.setId(2);
-//        vopros.setValue("valyyy kyk" + sessionId);
+
         Igrok igrok = userService.getNewIgrok(sessionId);
         Vopros vopros = userService.getPriorityVopros(igrok);
 
 
-        for(Znamenitost znamenitost :igrok.getListVozmohnyhVariantov()){
+        for (Znamenitost znamenitost : igrok.getListVozmohnyhVariantov()) {
             System.out.println(znamenitost);
         }
 
-//        igrok.setZaddanyiVopros(vopros.getId());
 
 // Используйте значение sessionId для идентификации пользователя
 // Устанавливаем куку сессии в ответе сервера
-//        response.addHeader("Set-Cookie", "session_id=" + sessionId);
+
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
         response.addHeader("Set-Cookie", "session_id=" + sessionId);
 
@@ -85,13 +80,142 @@ public class UserRestController {
     @PostMapping("yes")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Vopros> yes(HttpServletRequest request, HttpServletResponse response) {
-        //        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-//        Vopros vopros = new Vopros();
-//        vopros.setId(2);
-//        vopros.setValue("Yes");
-//
-//
-//        userService.vivodVConsol();
+
+
+        String sessionIda = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionIda = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- " + sessionIda);
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+        Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+        System.out.println(igrok.toString());
+
+        userService.setDovoprosaChekNaDooble(igrok);
+        userService.reforma(igrok, 1);
+
+
+        int ostalos = igrok.getListVozmohnyhVariantov().size();
+
+        Vopros vopros = new Vopros();
+
+        if (userService.checkPosleVoprosa(igrok)) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+            System.out.println("Neeeskolko");
+
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
+        } else
+            if (ostalos > 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+            vopros = userService.getPriorityVopros(igrok);
+        } else if (ostalos == 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
+        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+            vopros = new Vopros();
+            vopros.setId(5001);
+            vopros.setValue("Yes");
+
+        }
+
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        return ResponseEntity.ok(vopros);
+    }
+
+
+    @PostMapping("no")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Vopros> no(HttpServletRequest request, HttpServletResponse response) {
+
+        String sessionIda = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("session_id")) {
+                    sessionIda = cookie.getValue();
+                    System.out.println("кука first ---------------------------------- " + sessionIda);
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println("2GEEEEEEEEEEEEEEEET " + sessionIda);
+
+        Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+        System.out.println(igrok.toString());
+
+        userService.setDovoprosaChekNaDooble(igrok);
+        userService.reforma(igrok, -1);
+
+
+        int ostalos = igrok.getListVozmohnyhVariantov().size();
+
+        Vopros vopros = new Vopros();
+
+        if (userService.checkPosleVoprosa(igrok)) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+            System.out.println("Neeeskolko");
+
+
+
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("noDoble");
+
+        } else
+            if (ostalos > 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+            vopros = userService.getPriorityVopros(igrok);
+        } else if (ostalos == 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
+        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) { // todo нужно ли вопросы 0 оставлять
+            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+            vopros = new Vopros();
+            vopros.setId(5001);
+            vopros.setValue("Yes");
+
+        }
+
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
+        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        return ResponseEntity.ok(vopros);
+    }
+
+    @PostMapping("nany")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Vopros> nany(HttpServletRequest request, HttpServletResponse response) {
         String sessionIda = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -111,36 +235,19 @@ public class UserRestController {
         System.out.println(igrok.toString());
 
 
-//        igrok.getListOstavshihsyaVoprosov().remove(igrok.getListOstavshihsyaVoprosov().size()-1);
+        userService.reforma(igrok, 0);
 
 
-
-        userService.reforma(igrok, 1);
-
-
-       int ostalos = igrok.getListVozmohnyhVariantov().size();
+        int ostalos = igrok.getListVozmohnyhVariantov().size();
 
         Vopros vopros = new Vopros();
 
 
-
-
-        for(Znamenitost znamenitost :igrok.getListVozmohnyhVariantov()){
-            System.out.println(znamenitost);
-        }
-
-            // Выполнение редиректа на другую страницу
-//            throw new NotLoggedInException("please log in", "/ugadal");
-
-//
-
-        if(ostalos>1){
-            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
-           vopros = userService.getPriorityVopros(igrok);
-        }
-
-        else if (ostalos == 1) {
-            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
+        if (ostalos > 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+            vopros = userService.getPriorityVopros(igrok);
+        } else if (ostalos == 1) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
@@ -148,9 +255,8 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        }
-        else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
-            userService.setNazadanyiRaneeVoprosVLP(igrok,1);
+        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
             vopros = new Vopros();
             vopros.setId(5001);
             vopros.setValue("Yes");
@@ -158,84 +264,45 @@ public class UserRestController {
         }
 
 
-
-
-
-
-
-//        int ostalos = 1;
-
-//        if (ostalos == 1) {
-//
-//            System.out.println("FIIIIIIIIIIIIIIIIIIIIIIIIII");
-//
-//
-//            vopros = new Vopros();
-//            vopros.setId(5000);
-//            vopros.setValue("Yes");
-//
-//        }
-
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
         response.addHeader("Set-Cookie", "session_id=" + sessionIda);
         return ResponseEntity.ok(vopros);
     }
-
-
-    @PostMapping("no")
+//
+//    @PostMapping("/sesionnn")
 //    @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> no() {
-        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-        Vopros vopros = new Vopros();
-        vopros.setId(3);
-        vopros.setValue("No");
-        return ResponseEntity.ok(vopros);
-    }
-
-    @PostMapping("nany")
-//    @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> nany() {
-        System.out.println("7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa77");
-        Vopros vopros = new Vopros();
-        vopros.setId(1);
-        vopros.setValue("Nany");
-        return ResponseEntity.ok(vopros);
-    }
-
-    @PostMapping("/sesionnn")
-    @CrossOrigin(origins = "*")
-    public ResponseEntity sesionnn(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-        // Генерируем случайное число
-        Random rnd = new Random();
-        int randomNumber = rnd.nextInt(43);
-
-        // Получаем значение сессионной куки
-        String sessionId = String.valueOf(randomNumber);
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("session_id")) {
-                    sessionId = cookie.getValue();
-                    System.out.println("кука---------------------------------- " + sessionId);
-                    break;
-                }
-            }
-        }
-
-        // Создаем объект Vopros с id и value
-        Vopros vopros = new Vopros();
-        vopros.setId(randomNumber);
-        vopros.setValue(String.valueOf(randomNumber));
-
-        // Используйте значение sessionId для идентификации пользователя
-// Устанавливаем куку сессии в ответе сервера
-        if (sessionId != null) {
-            response.addHeader("Set-Cookie", "session_id=" + sessionId);
-        }
-
-        return ResponseEntity.ok(vopros);
-    }
+//    public ResponseEntity sesionnn(HttpServletRequest request, HttpServletResponse response) {
+//        System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+//        // Генерируем случайное число
+//        Random rnd = new Random();
+//        int randomNumber = rnd.nextInt(43);
+//
+//        // Получаем значение сессионной куки
+//        String sessionId = String.valueOf(randomNumber);
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("session_id")) {
+//                    sessionId = cookie.getValue();
+//                    System.out.println("кука---------------------------------- " + sessionId);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        // Создаем объект Vopros с id и value
+//        Vopros vopros = new Vopros();
+//        vopros.setId(randomNumber);
+//        vopros.setValue(String.valueOf(randomNumber));
+//
+//        // Используйте значение sessionId для идентификации пользователя
+//// Устанавливаем куку сессии в ответе сервера
+//        if (sessionId != null) {
+//            response.addHeader("Set-Cookie", "session_id=" + sessionId);
+//        }
+//
+//        return ResponseEntity.ok(vopros);
+//    }
 
 
 //    @GetMapping("/neznayuChto")

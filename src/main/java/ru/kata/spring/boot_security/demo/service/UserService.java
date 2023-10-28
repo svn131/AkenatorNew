@@ -21,6 +21,10 @@ public interface UserService  {
     public Igrok reforma(Igrok igrok , int otvet);
 
     public void removeIgrok(Igrok igrok);
+
+    public void setDovoprosaChekNaDooble(Igrok igrok);
+    public boolean checkPosleVoprosa(Igrok igrok);
+
 }
 
 

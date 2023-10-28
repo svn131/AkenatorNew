@@ -18,6 +18,10 @@ public class Igrok {
     int schetchikDobavlenyh = 0; //todo дбавить в сущнось зародыш
 
 
+   public int sizeDoVoprosa = 0;
+
+
+
 
     public Igrok(String idKuki, List<Znamenitost> listVozmohnyhVariantov, List<Vopros> listOstavshihsyaVoprosov) {
         this.idKuki = idKuki;
@@ -119,4 +123,7 @@ public class Igrok {
                 ", schetchikDobavlenyh=" + schetchikDobavlenyh +
                 '}';
     }
+
+
+
 }

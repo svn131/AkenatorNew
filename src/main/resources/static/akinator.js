@@ -68,11 +68,20 @@ async function answerNo() {
     });
 
     const data = await response.json();
+    voprosId = data.id;
 
     // $('#vopros-value').text(data.value);
     $('#vopros-value').empty().append(data.value);
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
-    console.log(data);
+
+    if (voprosId === 5000) {
+        console.log('tttttttttttuuuuut');
+        window.location.href = "http://85.116.125.155:8080/ugadal";
+    }
+    if (voprosId === 5001) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = "http://85.116.125.155:8080/neznayuChto";
+    }
 }
 
 async function answerNone() {

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
+import ru.kata.spring.boot_security.demo.model.Znamenitost;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.serviceSave.SaveService;
 
@@ -14,7 +15,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 
 @RestController
@@ -54,7 +57,21 @@ public class ConecREstController {
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-        String otvet = igrok.getListVozmohnyhVariantov().get(0).getName();
+        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
+
+        String otvet = ostavhieshesaVariantIinogaty.get(0).getName();
+///// чекаем на дубли или 0 дубли
+        if (ostavhieshesaVariantIinogaty.size() > 1) {
+            otvet = null;
+            StringJoiner joiner = new StringJoiner(" или ");
+            for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
+                joiner.add(znamenitost.getName());
+            }
+            otvet = joiner.toString();
+        }
+//////
+
+
 
         Vopros vopros = new Vopros();
         vopros.setId(5002);
