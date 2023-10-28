@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Igrok {
 
@@ -21,7 +22,9 @@ public class Igrok {
    public int sizeDoVoprosa = 0;
 
 
-
+    public Igrok(String idKuki) {
+        this.idKuki = idKuki;
+    }
 
     public Igrok(String idKuki, List<Znamenitost> listVozmohnyhVariantov, List<Vopros> listOstavshihsyaVoprosov) {
         this.idKuki = idKuki;
@@ -125,5 +128,16 @@ public class Igrok {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Igrok)) return false;
+        Igrok igrok = (Igrok) o;
+        return Objects.equals(getIdKuki(), igrok.getIdKuki());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdKuki());
+    }
 }

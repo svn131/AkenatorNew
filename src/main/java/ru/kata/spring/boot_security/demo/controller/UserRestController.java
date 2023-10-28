@@ -55,6 +55,8 @@ public class UserRestController {
             sessionId = UUID.randomUUID().toString();
         }
 
+userService.removeIgrok(sessionId);
+
         Igrok igrok = userService.getNewIgrok(sessionId);
         Vopros vopros = userService.getPriorityVopros(igrok);
 

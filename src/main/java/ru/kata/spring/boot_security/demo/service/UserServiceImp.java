@@ -40,6 +40,23 @@ public class UserServiceImp implements UserService {
 
     }
 
+//    public void removeIgrok(String kukiId){
+//        Igrok igrokDeleted = new Igrok(kukiId);
+//        for(Igrok igrok :repository.getListIgrokov()){
+//            if(igrok.getIdKuki().equals(kukiId)){
+//                igrokDeleted = igrok;
+//            }
+//        }
+//
+//        repository.getListIgrokov().remove(igrokDeleted);
+//        System.out.println("RRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEMMMMMMMMMMMMOOOOOOOOOOOOVVVVVVVVVVVVVEEEEEEEEENEw");
+//
+//    }
+
+    public void removeIgrok(String kukiId){
+        repository.getListIgrokov().removeIf(igrok -> igrok.getIdKuki().equals(kukiId));
+        System.out.println("REMOVEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeD");
+    }
 
 
 
