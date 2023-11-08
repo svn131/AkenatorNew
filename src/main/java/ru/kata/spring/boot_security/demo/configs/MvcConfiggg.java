@@ -16,7 +16,7 @@ public class MvcConfiggg implements WebMvcConfigurer {
         registry.addViewController("/new_game").setViewName("/new_game"); // Добавьте эту строку
         registry.addViewController("/neznayuChto").setViewName("/neznayuChto"); // Добавьте эту строку
         registry.addViewController("/ugadalverdo").setViewName("/ugadalverdo"); // Добавьте эту строку
-        registry.addViewController("/userProfile2").setViewName("/akinat2"); // Добавьте эту строку
+        registry.addViewController("/akinat2").setViewName("/akinat2"); // Добавьте эту строку
 
 //        registry.addViewController("userProfile/neznayuChto").setViewName("neznayuChto"); // Добавьте эту строку
 //        registry.addViewController("/neznayuChto").setViewName("neznayuChto"); // Добавьте эту строку

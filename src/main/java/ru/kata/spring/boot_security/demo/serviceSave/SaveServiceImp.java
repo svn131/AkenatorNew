@@ -321,7 +321,11 @@ public class SaveServiceImp implements SaveService {
 
         igrok.setListPamyty(vopros);    // обязательно добавить вопрос в лист памяти и убрать из листа оставшихся вопросов
 
-        return igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1);
+        Vopros voprosNaVidachu = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1);
+
+        listOstavshihsyaVoprosov.remove(voprosNaVidachu);
+
+        return voprosNaVidachu;
 
     }
 
@@ -357,7 +361,6 @@ public class SaveServiceImp implements SaveService {
         }
 
         reformiriemyiList = tempList;
-
 
 
     }

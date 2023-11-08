@@ -71,7 +71,7 @@ public class ConecVerDoREST {
 
             saveService.loghimZnamenitostySoshibkamiVListVVSO(igrok);
 
-
+            igrok.poshliProshenyeVoprosy = true;
 
 //            if (ostavhieshesaVariantIinogaty.size() > 1) { // не будет только если функция дубля попустит парочку иза того что не убавляеться
 //                otvet = null;
@@ -94,10 +94,11 @@ public class ConecVerDoREST {
             vopros.setId(5002);
             vopros.setValue(otvet);
 
-        } else {
+        } else { // сновная логика после первой выдачи - выдаеуже из прощенных
 
             otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
-            igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0));  //запоминаем знаменитости же спрашивали которые
+            igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0));  //запоминаем знаменитости уже спрашивали которые
+            igrok.getListVozmohVariantovSohibkami().remove(igrok.getListVozmohVariantovSohibkami().get(0)); // убераем ту сущность про которую уже спосили // todo можно дебажить должны сами убавляться псоле реформы
 
             vopros.setId(5002);
             vopros.setValue(otvet);

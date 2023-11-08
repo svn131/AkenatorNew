@@ -13,6 +13,7 @@ async function thisUser() {
     // const response = await fetch("http://85.116.125.155:8080/userProfile?" + Date.now());
 
     const data = await response.json();
+    voprosIdi = data.id;
 
     let voprosId = $(`<td>${data.id}</td>`);
     let voprosValue = $(`<td>${data.value}</td>`);
@@ -24,7 +25,10 @@ async function thisUser() {
 
     $('#vopros-image').attr('src', '/images/' + data.id + '.jpg');
 
-
+    if (voprosIdi === 5011) {
+        console.log('tttttttttttuuuuut123123');
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadal";
+    }
     console.log(data);
 
 
@@ -58,6 +62,10 @@ async function answerYes() {
         console.log('tttttttttttuuuuuta');
         window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
     }
+    if (voprosId === 5012) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadalverdo";
+    }
 
 }
 
@@ -88,6 +96,10 @@ async function answerNo() {
         console.log('tttttttttttuuuuuta');
         window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
     }
+    if (voprosId === 5012) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadalverdo";
+    }
 }
 
 async function answerNone() {
@@ -114,6 +126,10 @@ async function answerNone() {
     if (voprosId === 5001) {
         console.log('tttttttttttuuuuuta');
         window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
+    }
+    if (voprosId === 5012) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = BASEUUUUUURRRLLLL + "/ugadalverdo";
     }
 
 

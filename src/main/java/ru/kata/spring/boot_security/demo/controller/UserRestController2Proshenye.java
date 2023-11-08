@@ -60,13 +60,13 @@ public class UserRestController2Proshenye {
 
         Igrok igrok = userService.getIgrok(sessionId);
 
-        if (!igrok.poshliProshenyeVoprosy) { // первая и единственная установка прощенных
 
-        }
-
-        igrok.poshliProshenyeVoprosy = true;
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
+
+        System.out.println("Debaga------------------------------------------------------");
+        System.out.println(igrok.getListVozmohVariantovSohibkami().toString());
+        System.out.println(igrok.getListVozmohVariantovSohibkami().size());
 
         if (ostalosProZnamenitostey == 0) {
             vopros.setId(5000);// na neznayku
@@ -75,7 +75,7 @@ public class UserRestController2Proshenye {
 
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("conec");
+            vopros.setValue("conec2222222222");
         } else {
 
 
@@ -132,7 +132,7 @@ public class UserRestController2Proshenye {
 
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("conec");
+            vopros.setValue("conec333333");
         } else {
 
 
@@ -184,7 +184,7 @@ public class UserRestController2Proshenye {
 
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("conec");
+            vopros.setValue("conec4444444");
         } else {
 
 
@@ -234,7 +234,7 @@ public class UserRestController2Proshenye {
 
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("conec");
+            vopros.setValue("conec11111111111111111111111");
         } else {
 
 
