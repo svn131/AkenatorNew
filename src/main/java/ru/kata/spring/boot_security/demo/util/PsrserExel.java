@@ -28,9 +28,9 @@ public class PsrserExel {
     Repository repository;
 
 
-    List<Vopros> voprosyLst = new ArrayList<>();
+    List<Vopros> voprosyLst;
 
-    List<Znamenitost> znamenitostList = new ArrayList<>();
+    List<Znamenitost> znamenitostList;
 
 
     public PsrserExel() {
@@ -39,9 +39,11 @@ public class PsrserExel {
 
     }
 
-    @PostConstruct
+    //    @PostConstruct
     public void parsExel() throws Exception {
 
+        znamenitostList = new ArrayList<>();
+        voprosyLst = new ArrayList<>();
 
         FileInputStream file = new FileInputStream("C:/AkinatorAI.xlsx");
 
@@ -87,38 +89,37 @@ public class PsrserExel {
             idZnamenitostyTemp++;
             //парсим вопрсы
 
-          znamenitost.setOtvetyList(poluchitNaKonkretnogo(sheet));
+            znamenitost.setOtvetyList(poluchitNaKonkretnogo(sheet));
 
-                    //парсим вопрсы
-                    znamenitostList.add(znamenitost);
-                    System.out.println(odinIz);
-                }
-
-
-                System.out.println("Значения первого столбца - Вопросы:");
+            //парсим вопрсы
+            znamenitostList.add(znamenitost);
+            System.out.println(odinIz);
+        }
 
 
-                for (String value : voprosyS1PoMax) {
-                    Vopros vopros = new Vopros(nomerVoprosa, value);
-                    nomerVoprosa++;
-                    voprosyLst.add(vopros);
-                    System.out.println(value);
-                }
-
-                repository.setZnamenitostList(znamenitostList);
-                repository.setVoprosList(voprosyLst);
+        System.out.println("Значения первого столбца - Вопросы:");
 
 
-                idZnamenitostyTemp = 1;
+        for (String value : voprosyS1PoMax) {
+            Vopros vopros = new Vopros(nomerVoprosa, value);
+            nomerVoprosa++;
+            voprosyLst.add(vopros);
+            System.out.println(value);
+        }
 
-                workbook.close();
-                file.close();
+        repository.setZnamenitostList(znamenitostList);
+        repository.setVoprosList(voprosyLst);
 
 
-            }
+        idZnamenitostyTemp = 1;
 
+        workbook.close();
+        file.close();
 
-
+        nomerVoprosa = 1;
+        nomerTemp = 1;
+        idZnamenitostyTemp = 1;
+    }
 
 
     public List<Vopros> poluchitNaKonkretnogo(Sheet sheet) {
@@ -133,8 +134,7 @@ public class PsrserExel {
 
             if (cell != null && cell.getCellType() == CellType.NUMERIC) {
                 int intValue = (int) cell.getNumericCellValue();
-                otvetyDlyaOndnogo.add(new Vopros(i,intValue));
-
+                otvetyDlyaOndnogo.add(new Vopros(i, intValue));
 
 
             }
@@ -144,8 +144,6 @@ public class PsrserExel {
         return otvetyDlyaOndnogo;
 
     }
-
-
 
 
 //    public void checidDvoinik()//todo долгая x2x2x2x2 проблема - проще отдельный модуль написать c картинками

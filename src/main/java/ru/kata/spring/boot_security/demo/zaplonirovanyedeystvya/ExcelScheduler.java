@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.zaplonirovanyedeystvya;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.util.PsrserExel;
+import ru.kata.spring.boot_security.demo.util.WriteZarodushy;
 
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
@@ -14,6 +15,9 @@ public class ExcelScheduler {
 
     @Autowired
     PsrserExel psrserExel;
+
+    @Autowired
+    WriteZarodushy writeZarodushy;
 
 
     @PostConstruct
@@ -40,9 +44,14 @@ public class ExcelScheduler {
 
         // Запуск задания один раз в сутки
         timer.schedule(task, today.getTime(), 24 * 60 * 60 * 1000);
+//        timer.schedule(task, today.getTime(), 5 * 60 * 1000); // todo интервал 5 минут - для отладки
+
     }
 
     public void parsExel() throws Exception {
-        psrserExel.parsExel();
+        psrserExel.parsExel(); // todo RuntimeExeption ?
+        System.out.println("Прошел парсинг с основного листа");
+        writeZarodushy.writeExelZarodysh();
+        System.out.println("Прошло сорхранение очерендной версии зародышей");
     }
 }
