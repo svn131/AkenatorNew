@@ -25,6 +25,8 @@ public class Igrok {
 
    int shetchikProshenya = 0;
 
+   public boolean poshliProshenyeVoprosy;
+
 
     public Igrok(String idKuki) {
         this.idKuki = idKuki;

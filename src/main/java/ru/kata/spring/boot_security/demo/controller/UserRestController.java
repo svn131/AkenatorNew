@@ -106,13 +106,13 @@ public class UserRestController {
         userService.setDovoprosaChekNaDooble(igrok);
         userService.reforma(igrok, 1);
 
-
+        userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
         int ostalos = igrok.getListVozmohnyhVariantov().size();
 
         Vopros vopros = new Vopros();
 
         if (userService.checkPosleVoprosa(igrok)) { //варианы еще есть но сущности всеодинаковые только имена разные аоэтому вывод в свет
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+
             System.out.println("Neeeskolko");
 
 
@@ -121,10 +121,10 @@ public class UserRestController {
             vopros.setValue("noDoble");
 
         } else if (ostalos > 1) { //стандарт - логика - >  редирект сюда же
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
+
             vopros = userService.getPriorityVopros(igrok);
+
         } else if (ostalos <= 1) { // кончались варианты последний летит на показ морду
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
@@ -133,7 +133,6 @@ public class UserRestController {
             vopros.setValue("Yes");
 
         } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             vopros = new Vopros();
             vopros.setId(5001);
             vopros.setValue("Yes");

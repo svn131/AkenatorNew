@@ -49,33 +49,36 @@ public class UserRestController2Proshenye {
         String sessionId = null;
         Cookie[] cookies = request.getCookies();
 
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("session_id")) {
-                    sessionId = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- " + sessionId);
-                    break;
-                }
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session_id")) {
+                sessionId = cookie.getValue();
+                System.out.println("кука first ---------------------------------- " + sessionId);
+                break;
             }
-
+        }
 
 
         Vopros vopros = new Vopros();
 
         Igrok igrok = userService.getIgrok(sessionId);
 
-       int ostalosProZnamenitostey =  igrok.getListVozmohVariantovSohibkami().size();
+        igrok.poshliProshenyeVoprosy = true;
 
-//        if(ostalosProZnamenitostey == 0){
-//            vopros.setId(5000);// na neznayku
-//            vopros.setValue("neznayu");
-         if (ostalosProZnamenitostey == 1) {
+        int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
+
+        if(ostalosProZnamenitostey == 0){
+            vopros.setId(5000);// na neznayku
+            vopros.setValue("neznayu");
+
+
+    } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
         }else {
 
 
              vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-             vopros.setId(5009);// na snogoPocaz
+             vopros.setId(vopros.getId());
              vopros.setValue(vopros.getValue());
 
          }
@@ -96,40 +99,48 @@ public class UserRestController2Proshenye {
     public ResponseEntity<Vopros> yes(HttpServletRequest request, HttpServletResponse response) {
 
 
-        String sessionIda = null;
+        // Получаем значение сессионной куки
+        String sessionId = null;
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("session_id")) {
-                    sessionIda = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- " + sessionIda);
-                    break;
-                }
-            }
 
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session_id")) {
+                sessionId = cookie.getValue();
+                System.out.println("кука first ---------------------------------- " + sessionId);
+                break;
+            }
         }
+
 
         Vopros vopros = new Vopros();
 
-        Igrok igrok = userService.getIgrok(sessionIda);
-
-        int ostalosProZnamenitostey =  igrok.getListVozmohVariantovSohibkami().size();
+        Igrok igrok = userService.getIgrok(sessionId);
 
 
-        if (ostalosProZnamenitostey == 1) {
+        saveService.reformaProshennuh(igrok, 1);
+
+
+        int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
+
+        if(ostalosProZnamenitostey == 0){
+            vopros.setId(5000);// na neznayku
+            vopros.setValue("neznayu");
+
+
+        } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
         }else {
 
 
-            vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na snogoPocaz
-            vopros.setValue(vopros.getValue());
+
+            vopros.setId(5012);
+            vopros.setValue("vdr"); // na COnecVerDoRest
 
         }
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
-        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        response.addHeader("Set-Cookie", "session_id=" + sessionId);
         return ResponseEntity.ok(vopros);
     }
 
@@ -138,81 +149,98 @@ public class UserRestController2Proshenye {
     @CrossOrigin(origins = "*")
     public ResponseEntity<Vopros> no(HttpServletRequest request, HttpServletResponse response) {
 
-        String sessionIda = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("session_id")) {
-                    sessionIda = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- " + sessionIda);
-                    break;
-                }
-            }
 
+        // Получаем значение сессионной куки
+        String sessionId = null;
+        Cookie[] cookies = request.getCookies();
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session_id")) {
+                sessionId = cookie.getValue();
+                System.out.println("кука first ---------------------------------- " + sessionId);
+                break;
+            }
         }
+
 
         Vopros vopros = new Vopros();
 
-        Igrok igrok = userService.getIgrok(sessionIda);
-
-        int ostalosProZnamenitostey =  igrok.getListVozmohVariantovSohibkami().size();
+        Igrok igrok = userService.getIgrok(sessionId);
 
 
-        if (ostalosProZnamenitostey == 1) {
+        saveService.reformaProshennuh(igrok, 1);
+
+
+        int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
+
+        if(ostalosProZnamenitostey == 0){
+            vopros.setId(5000);// na neznayku
+            vopros.setValue("neznayu");
+
+
+        } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
         }else {
 
 
-            vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na snogoPocaz
-            vopros.setValue(vopros.getValue());
+
+            vopros.setId(5012);
+            vopros.setValue("vdr"); // na COnecVerDoRest
 
         }
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
-        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        response.addHeader("Set-Cookie", "session_id=" + sessionId);
         return ResponseEntity.ok(vopros);
     }
 
     @PostMapping("nany")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Vopros> nany(HttpServletRequest request, HttpServletResponse response) { //todo добавляем в лист памяти ??
-        String sessionIda = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("session_id")) {
-                    sessionIda = cookie.getValue();
-                    System.out.println("кука first ---------------------------------- " + sessionIda);
-                    break;
-                }
-            }
 
+        // Получаем значение сессионной куки
+        String sessionId = null;
+        Cookie[] cookies = request.getCookies();
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session_id")) {
+                sessionId = cookie.getValue();
+                System.out.println("кука first ---------------------------------- " + sessionId);
+                break;
+            }
         }
+
 
         Vopros vopros = new Vopros();
 
-        Igrok igrok = userService.getIgrok(sessionIda);
-
-        int ostalosProZnamenitostey =  igrok.getListVozmohVariantovSohibkami().size();
+        Igrok igrok = userService.getIgrok(sessionId);
 
 
-        if (ostalosProZnamenitostey == 1) {
+        saveService.reformaProshennuh(igrok, 1);
+
+
+        int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
+
+        if(ostalosProZnamenitostey == 0){
+            vopros.setId(5000);// na neznayku
+            vopros.setValue("neznayu");
+
+
+        } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
         }else {
 
 
-            vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na snogoPocaz
-            vopros.setValue(vopros.getValue());
+
+            vopros.setId(5012);
+            vopros.setValue("vdr"); // na COnecVerDoRest
 
         }
 
-
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
-        response.addHeader("Set-Cookie", "session_id=" + sessionIda);
+        response.addHeader("Set-Cookie", "session_id=" + sessionId);
         return ResponseEntity.ok(vopros);
     }
 

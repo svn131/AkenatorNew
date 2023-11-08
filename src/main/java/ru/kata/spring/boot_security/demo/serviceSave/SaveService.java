@@ -22,6 +22,8 @@ public interface SaveService {
 
     public Vopros getProshenuyPriorityVopros(Igrok igrok);
 
+    public void reformaProshennuh(Igrok igrok, int otvet);
+
 
 
 

@@ -54,25 +54,37 @@ public class ConecVerDoREST {
         }
 
 
-
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
 
-        String otvet = ostavhieshesaVariantIinogaty.get(0).getName();
-///// чекаем на дубли или 0 дубли
-        if (ostavhieshesaVariantIinogaty.size() > 1) {
-            otvet = null;
-            StringJoiner joiner = new StringJoiner(" или ");
-            for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
-                joiner.add(znamenitost.getName());
-            }
-            otvet = joiner.toString();
-        }
-
+        String otvet = "";
         Vopros vopros = new Vopros();
-        vopros.setId(5002);
-        vopros.setValue(otvet);
+
+        if (!igrok.poshliProshenyeVoprosy) {
+
+            List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
+
+            otvet = ostavhieshesaVariantIinogaty.get(0).getName();
+///// чекаем на дубли или 0 дубли
+            if (ostavhieshesaVariantIinogaty.size() > 1) {
+                otvet = null;
+                StringJoiner joiner = new StringJoiner(" или ");
+                for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
+                    joiner.add(znamenitost.getName());
+                }
+                otvet = joiner.toString();
+            }
+
+
+            vopros.setId(5002);
+            vopros.setValue(otvet);
+
+        } else {
+            otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
+
+            vopros.setId(5002);
+            vopros.setValue(otvet);
+        }
 
 
         ////////
@@ -87,7 +99,6 @@ public class ConecVerDoREST {
             String filePath = "C:\\333\\" + filename;
 
             File file = new File(filePath);
-
 
 
             // Проверяем, существует ли файл
@@ -109,8 +120,6 @@ public class ConecVerDoREST {
             }
         }
         //
-
-
 
 
         return ResponseEntity.ok(vopros);
@@ -157,7 +166,7 @@ public class ConecVerDoREST {
 
     @PostMapping("no")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> no(@RequestBody Map<String, String> requestBody, HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public ResponseEntity<Vopros> no(@RequestBody Map<String, String> requestBody, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userInput = requestBody.get("input"); // Получение переданного текста
 
 
@@ -181,22 +190,20 @@ public class ConecVerDoREST {
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-Vopros vopros = new Vopros();
+        Vopros vopros = new Vopros();
 
-        if (igrok.getListVozmohnyhVariantov().size() == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0){
+        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
             vopros.setId(5010); // отправляем на незнаю
             vopros.setValue("NoneInfo");
 
-        }else {
+        } else {
 
 
-            vopros.setId(5008); // отправляем задать вопос
-            vopros.setValue(vopros.getValue());
+            vopros.setId(5008); // отправляем задать вопос UserRestController2
+            vopros.setValue("newVopros");
 
 
         }
-
-
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш

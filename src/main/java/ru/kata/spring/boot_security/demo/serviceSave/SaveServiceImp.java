@@ -112,7 +112,7 @@ public class SaveServiceImp implements SaveService {
         if (zarodishList != null) {
             for (Znamenitost zarodysh : zarodishList) {
                 if (zarodysh.getName().equalsIgnoreCase(vveli)) {
-                    napolnenyerVoprosovDobavkiEslyESTZarodysh(igrok,zarodysh);
+                    napolnenyerVoprosovDobavkiEslyESTZarodysh(igrok, zarodysh);
                     return zarodysh;
                 }
             }
@@ -128,10 +128,10 @@ public class SaveServiceImp implements SaveService {
 
     }
 
-    public void napolnenyerVoprosovDobavkiEslyESTZarodysh(Igrok igrok,Znamenitost zarodish){
-        igrok .setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
-        List<Vopros> listVDDuIgroka  = igrok.getListVoprosovDlyaDobavlenyya();
-        List<Vopros> voprosListZaroddysh =  zarodish.getOtvetyList();
+    public void napolnenyerVoprosovDobavkiEslyESTZarodysh(Igrok igrok, Znamenitost zarodish) {
+        igrok.setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
+        List<Vopros> listVDDuIgroka = igrok.getListVoprosovDlyaDobavlenyya();
+        List<Vopros> voprosListZaroddysh = zarodish.getOtvetyList();
 
 //        voprosListZaroddysh.addAll(igrok.getListPamyty());
 
@@ -156,11 +156,9 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-
-
     public void napolnenyerVoprosovDobavkiEslyNEtZarodysha(Igrok igrok) {
 
-        igrok .setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
+        igrok.setListVoprosovDlyaDobavlenyya(new ArrayList<Vopros>());
 
         for (Vopros vopros : repository.getVoprosList()) {
             boolean isContained = false;
@@ -199,8 +197,6 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-
-
     public void setZadanyiVopros(Igrok igrok, int otvet) {
         Vopros vopros = igrok.getListVoprosovDlyaDobavlenyya().get(0);
         vopros.setOtvet(otvet);
@@ -230,9 +226,9 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-    public  void proverkaAndWrite(Igrok igrok) throws IOException {
-      int uIgoka =  igrok.getZnamenitostDobalenya().getOtvetyList().size();
-      int vRepo = repository.getVoprosList().size();
+    public void proverkaAndWrite(Igrok igrok) throws IOException {
+        int uIgoka = igrok.getZnamenitostDobalenya().getOtvetyList().size();
+        int vRepo = repository.getVoprosList().size();
 
         double threshold = vRepo * percentage;
 
@@ -245,19 +241,15 @@ public class SaveServiceImp implements SaveService {
 
             repositoryZarodyshey.getZarodishList().remove(znamenitost); // убираем из зародышей
 
-          String name =  znamenitost.getName();
+            String name = znamenitost.getName();
 
-         int pisatV = repository.getZnamenitostList().size();
-
-
-          List<Vopros> listItvetov =  igrok.getZnamenitostDobalenya().getOtvetyList();
+            int pisatV = repository.getZnamenitostList().size();
 
 
+            List<Vopros> listItvetov = igrok.getZnamenitostDobalenya().getOtvetyList();
 
 
-
-         ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", pisatV, 0, name, listItvetov);
-
+            ExcelWriter.writeCellValue("C:/AkinatorAI.xlsx", pisatV, 0, name, listItvetov);
 
 
         }
@@ -266,12 +258,11 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-    public void removeIgrok(Igrok igrok){
+    public void removeIgrok(Igrok igrok) {
         repository.getListIgrokov().remove(igrok);
         System.out.println("RRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEMMMMMMMMMMMMOOOOOOOOOOOOVVVVVVVVVVVVVEEEEEEEEE");
 
     }
-
 
 
     public void umenshenyeVoprosEslivZarodysheUgheEst(Igrok igrok) {
@@ -295,11 +286,14 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-    public Vopros getProshenuyPriorityVopros(Igrok igrok){
+    public Vopros getProshenuyPriorityVopros(Igrok igrok) {
+
         return new Vopros();
     }
 
+    public void reformaProshennuh(Igrok igrok, int otvet) {
 
+    }
 }
 
 
