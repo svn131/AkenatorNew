@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.model.Igrok;
 import ru.kata.spring.boot_security.demo.model.Vopros;
 import ru.kata.spring.boot_security.demo.model.Znamenitost;
 import ru.kata.spring.boot_security.demo.service.UserService;
+//import ru.kata.spring.boot_security.demo.util.JwtUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -55,15 +56,15 @@ public class UserRestController {
             sessionId = UUID.randomUUID().toString();
         }
 
-userService.removeIgrok(sessionId);
+        userService.removeIgrok(sessionId);
 
         Igrok igrok = userService.getNewIgrok(sessionId);
         Vopros vopros = userService.getPriorityVopros(igrok);
 
 
-        for (Znamenitost znamenitost : igrok.getListVozmohnyhVariantov()) {
-            System.out.println(znamenitost);
-        }
+//        for (Znamenitost znamenitost : igrok.getListVozmohnyhVariantov()) {
+//            System.out.println(znamenitost);
+//        }
 
 
 // Используйте значение sessionId для идентификации пользователя
@@ -119,8 +120,7 @@ userService.removeIgrok(sessionId);
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else
-            if (ostalos > 1) {
+        } else if (ostalos > 1) {
             userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             vopros = userService.getPriorityVopros(igrok);
         } else if (ostalos == 1) {
@@ -182,14 +182,11 @@ userService.removeIgrok(sessionId);
             System.out.println("Neeeskolko");
 
 
-
-
             vopros = new Vopros();
             vopros.setId(5000);
             vopros.setValue("noDoble");
 
-        } else
-            if (ostalos > 1) {
+        } else if (ostalos > 1) {
             userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
             vopros = userService.getPriorityVopros(igrok);
         } else if (ostalos == 1) {
@@ -237,16 +234,13 @@ userService.removeIgrok(sessionId);
         System.out.println(igrok.toString());
 
 
-
-        userService.reforma(igrok,0);
+        userService.reforma(igrok, 0);
 
         userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
-       Vopros vopros = userService.getPriorityVopros(igrok);
+        Vopros vopros = userService.getPriorityVopros(igrok);
 
 
-
-
-         if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
+        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
             userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
             vopros = new Vopros();
             vopros.setId(5001);

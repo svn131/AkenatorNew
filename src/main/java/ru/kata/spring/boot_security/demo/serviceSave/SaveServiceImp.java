@@ -23,9 +23,9 @@ public class SaveServiceImp implements SaveService {
 
     private Repository repository;
 
-    int colSovpadenyiDlyaZameny = 2;
+    int colSovpadenyiDlyaZameny = 10;
 
-    int colVoprosovNaNovoeDobavlenye = 2; // можно ставить хоть 10000 выше головы не прыгнет всеравно
+    int colVoprosovNaNovoeDobavlenye = 15; // можно ставить хоть 10000 выше головы не прыгнет всеравно
 
 
     double percentage = 1.0; // 0.8 = 80% процент при котором выходит в продакшен
@@ -237,11 +237,13 @@ public class SaveServiceImp implements SaveService {
         double threshold = vRepo * percentage;
 
         if (uIgoka >= threshold) {
-            // код, который должен сработать при заполненности 80%
+            // код, который должен сработать при заполненности 100%
 
             Znamenitost znamenitost = igrok.getZnamenitostDobalenya();
 
             repository.getZnamenitostList().add(znamenitost);
+
+            repositoryZarodyshey.getZarodishList().remove(znamenitost); // убираем из зародышей
 
           String name =  znamenitost.getName();
 

@@ -14,7 +14,7 @@ import ru.kata.spring.boot_security.demo.serviceSave.SaveService;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -36,7 +36,7 @@ public class ConecREstController {
 
     @GetMapping()
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Vopros> vidachaFirst(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Vopros> vidachaFirst(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("11111111111111111111111111111111111111111");
 
 
@@ -69,13 +69,49 @@ public class ConecREstController {
             }
             otvet = joiner.toString();
         }
-//////
-
-
 
         Vopros vopros = new Vopros();
         vopros.setId(5002);
         vopros.setValue(otvet);
+
+
+        ////////
+        //        //логика текстового вывода
+        //
+        //
+        ////////
+        // Читаем содержимое файла, если оно есть
+        if (otvet != null) {
+            String filename = otvet + ".txt";
+//            String filename =  "1.txt";
+            String filePath = "C:\\333\\" + filename;
+
+            File file = new File(filePath);
+
+
+
+            // Проверяем, существует ли файл
+            if (file.exists()) {
+                StringBuilder content = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = reader.readLine()) != null) {
+//                    content.append(line).append("\
+                    content.append(line).append("<br>"); // или content.append(line).append("\n");
+
+                }
+                reader.close();
+
+                // Добавляем содержимое файла к ответу
+//                vopros.setValue(vopros.getValue() + "\n" + content.toString());
+                vopros.setValue(vopros.getValue() + "<br>" + content.toString());
+
+            }
+        }
+        //
+
+
+
 
         return ResponseEntity.ok(vopros);
     }
