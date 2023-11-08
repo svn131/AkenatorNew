@@ -70,12 +70,12 @@ public class UserRestController2Proshenye {
 //            vopros.setValue("neznayu");
          if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("neznayu");
+            vopros.setValue("conec");
         }else {
 
 
              vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-             vopros.setId(5009);// na ConecVerDoRest
+             vopros.setId(5009);// na snogoPocaz
              vopros.setValue(vopros.getValue());
 
          }
@@ -118,12 +118,12 @@ public class UserRestController2Proshenye {
 
         if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("neznayu");
+            vopros.setValue("conec");
         }else {
 
 
             vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na ConecVerDoRest
+            vopros.setId(5009);// na snogoPocaz
             vopros.setValue(vopros.getValue());
 
         }
@@ -160,12 +160,12 @@ public class UserRestController2Proshenye {
 
         if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("neznayu");
+            vopros.setValue("conec");
         }else {
 
 
             vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na ConecVerDoRest
+            vopros.setId(5009);// na snogoPocaz
             vopros.setValue(vopros.getValue());
 
         }
@@ -200,12 +200,12 @@ public class UserRestController2Proshenye {
 
         if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
-            vopros.setValue("neznayu");
+            vopros.setValue("conec");
         }else {
 
 
             vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-            vopros.setId(5009);// na ConecVerDoRest
+            vopros.setId(5009);// na snogoPocaz
             vopros.setValue(vopros.getValue());
 
         }
@@ -219,3 +219,4 @@ public class UserRestController2Proshenye {
 
 }
 
+// todo прописать везде что в случае если 0 то перейти на незнаю

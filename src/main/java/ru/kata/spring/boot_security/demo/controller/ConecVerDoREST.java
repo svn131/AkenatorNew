@@ -57,7 +57,7 @@ public class ConecVerDoREST {
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohVariantovSohibkami();
+        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
 
         String otvet = ostavhieshesaVariantIinogaty.get(0).getName();
 ///// чекаем на дубли или 0 дубли
