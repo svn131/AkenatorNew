@@ -62,6 +62,10 @@ public class UserRestController2Proshenye {
 
         Igrok igrok = userService.getIgrok(sessionId);
 
+        if(!igrok.poshliProshenyeVoprosy){ // первая и единственная установка прощенных
+
+        }
+
         igrok.poshliProshenyeVoprosy = true;
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
