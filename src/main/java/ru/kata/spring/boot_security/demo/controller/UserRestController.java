@@ -132,12 +132,13 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
-            vopros = new Vopros();
-            vopros.setId(5001);
-            vopros.setValue("Yes");
-
         }
+//        else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
+//            vopros = new Vopros();
+//            vopros.setId(5001);
+//            vopros.setValue("Yes");
+//
+//        } //todo если даже лст пустой то он наполниться на следующем ходу теми кто с ошибками
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
@@ -197,13 +198,14 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
-            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
-            vopros = new Vopros();
-            vopros.setId(5001);
-            vopros.setValue("Yes");
-
         }
+//        else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
+//            userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+//            vopros = new Vopros();
+//            vopros.setId(5001);
+//            vopros.setValue("Yes");
+//
+//        } //todo если даже лст пустой то он наполниться на следующем ходу теми кто с ошибками
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
@@ -266,13 +268,14 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
-            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
-            vopros = new Vopros();
-            vopros.setId(5001);
-            vopros.setValue("Yes");
-
         }
+//        else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
+//            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+//            vopros = new Vopros();
+//            vopros.setId(5001);
+//            vopros.setValue("Yes");
+//
+//        } //todo если даже лст пустой то он наполниться на следующем ходу теми кто с ошибками
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш

@@ -18,7 +18,7 @@ public class Vopros implements Comparable<Vopros> {
 
     private int countMinus1;
 
-    private int castaNomer;
+    private int castaNomer; // todo походу ненужен
 
 
 

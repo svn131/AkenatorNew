@@ -62,17 +62,27 @@ public class ConecVerDoREST {
 
         if (!igrok.poshliProshenyeVoprosy) {
 
+            saveService.loghimZnamenitostySoshibkamiVListVVSO(igrok);
+
             List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
 
-            otvet = ostavhieshesaVariantIinogaty.get(0).getName();
-///// чекаем на дубли или 0 дубли
-            if (ostavhieshesaVariantIinogaty.size() > 1) {
+            otvet = ostavhieshesaVariantIinogaty.get(0).getName(); // todo esli netu =0 прописать логику----------------------
+            igrok.listIstoryyPokazovZnamenitosteynaMorde.add(ostavhieshesaVariantIinogaty.get(0)); //запоминаем знаменитости же спрашивали которые
+
+            if (ostavhieshesaVariantIinogaty.size() > 1) { // не будет только если функция дубля попустит парочку иза того что не убавляеться
                 otvet = null;
                 StringJoiner joiner = new StringJoiner(" или ");
                 for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
                     joiner.add(znamenitost.getName());
+                    igrok.listIstoryyPokazovZnamenitosteynaMorde.add(znamenitost); //todo возможно убрать блок дублей ??  //запоминаем знаменитости же спрашивали которые
                 }
                 otvet = joiner.toString();
+            }else if(ostavhieshesaVariantIinogaty.size() == 0){
+
+                otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
+                igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0)); //запоминаем знаменитости же спрашивали которые
+                vopros.setId(5002);
+                vopros.setValue(otvet);
             }
 
 
@@ -80,11 +90,15 @@ public class ConecVerDoREST {
             vopros.setValue(otvet);
 
         } else {
+
             otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
+            igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0));  //запоминаем знаменитости же спрашивали которые
 
             vopros.setId(5002);
             vopros.setValue(otvet);
         }
+
+
 
 
         ////////
@@ -189,6 +203,8 @@ public class ConecVerDoREST {
         System.out.println("2GEEEEEEEEEEEEEEEETneugadal " + sessionIda);
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
+
+
 
         Vopros vopros = new Vopros();
 

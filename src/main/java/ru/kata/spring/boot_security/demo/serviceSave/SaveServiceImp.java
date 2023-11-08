@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.util.ExcelWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -286,12 +287,110 @@ public class SaveServiceImp implements SaveService {
     }
 
 
-    public Vopros getProshenuyPriorityVopros(Igrok igrok) {
+    public Vopros getProshenuyPriorityVopros(Igrok igrok) { // обязательно только посл реформы
 
-        return new Vopros();
+        List<Znamenitost> listVarikovSoshibkami = igrok.getListVozmohVariantovSohibkami();
+        List<Vopros> listOstavshihsyaVoprosov = igrok.getListOstavshihsyaVoprosov();
+
+        for (Vopros vopros : listOstavshihsyaVoprosov) {
+            vopros.nulableSet(); // занулили
+        }
+
+        for (Vopros voprosIzOstvshihsya : listOstavshihsyaVoprosov)
+            for (Znamenitost znamenitost : listVarikovSoshibkami) {
+                for (Vopros otvetOdnoyZnamenytosty : znamenitost.getOtvetyList()) {
+                    if (otvetOdnoyZnamenytosty.getId() == voprosIzOstvshihsya.getId()) {
+
+                        if (otvetOdnoyZnamenytosty.getOtvet() == 1) {
+                            voprosIzOstvshihsya.incremetCount1();
+                        } else if (otvetOdnoyZnamenytosty.getOtvet() == -1) {
+                            voprosIzOstvshihsya.incremetCountNimus1();                    // набиваем заного оценку вопросов
+
+                        }
+
+
+                    }
+                }
+            }
+
+        Collections.sort(listOstavshihsyaVoprosov);
+
+        int idy = igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1).getId();
+        Vopros vopros = new Vopros();
+        vopros.setId(idy);
+
+        igrok.setListPamyty(vopros);    // обязательно добавить вопрос в лист памяти и убрать из листа оставшихся вопросов
+
+        return igrok.getListOstavshihsyaVoprosov().get(igrok.getListOstavshihsyaVoprosov().size() - 1);
+
     }
 
-    public void reformaProshennuh(Igrok igrok, int otvet) {
+
+    public void reformaProshennuh(Igrok igrok) {
+//        igrok.setListVozmohVariantovSohibkami(new ArrayList<Znamenitost>());  // чистим данные со старого хода
+
+        List<Znamenitost> reformiriemyiList = igrok.getListVozmohVariantovSohibkami();
+        List<Znamenitost> tempList = new ArrayList<>();
+
+        List<Vopros> listZadanyhVoprosov = igrok.getListPamyty();
+
+        for (Znamenitost znamenitost : reformiriemyiList) {
+            int oshhibki = 0;
+            List<Vopros> listOtvetovEtoyZnamenytosty = znamenitost.getOtvetyList();
+            for (Vopros otvetEtoyZnamenitosty : listOtvetovEtoyZnamenytosty) {
+                for (Vopros otvetIgroka : listZadanyhVoprosov) {
+                    if (otvetEtoyZnamenitosty.getId() == otvetIgroka.getId()) { // если
+                        if (otvetEtoyZnamenitosty.getOtvet() != otvetIgroka.getOtvet()) {
+                            oshhibki++;
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+            if (oshhibki <= 5) {
+                tempList.add(znamenitost);
+            }
+        }
+
+        reformiriemyiList = tempList;
+
+
+
+    }
+
+
+    public void loghimZnamenitostySoshibkamiVListVVSO(Igrok igrok) {
+
+        igrok.setListVozmohVariantovSohibkami(new ArrayList<Znamenitost>());  // чистим данные со старого хода
+        List<Znamenitost> listVariantovsOshibkami = igrok.getListVozmohVariantovSohibkami();
+
+        List<Znamenitost> listvsehZnamenitostey = repository.getZnamenitostList();
+        for (Znamenitost znamenitost : listvsehZnamenitostey) {
+            int oshhibki = 0;
+            List<Vopros> listOtvetovEtoyZnamenytosty = znamenitost.getOtvetyList();
+            for (Vopros otvetEtoyZnamenitosty : listOtvetovEtoyZnamenytosty) {
+                for (Vopros otvetIgroka : igrok.getListPamyty()) {
+                    if (otvetEtoyZnamenitosty.getId() == otvetIgroka.getId()) { // если
+                        if (otvetEtoyZnamenitosty.getOtvet() != otvetIgroka.getOtvet()) {
+                            oshhibki++;
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+            if (oshhibki <= 5) {
+                listVariantovsOshibkami.add(znamenitost);
+            }
+        }
+
 
     }
 }

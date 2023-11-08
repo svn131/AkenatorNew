@@ -12,20 +12,22 @@ public class Igrok {
 
     List<Znamenitost> listVozmohnyhVariantov;
 
-    List<Vopros>  listOstavshihsyaVoprosov;
+    List<Vopros> listOstavshihsyaVoprosov;
 
-    List<Vopros>  listPamyty = new ArrayList<>();
+    List<Vopros> listPamyty = new ArrayList<>();
 
     Znamenitost znamenitostDobalenya; //todo дбавить в сущнось зародыш
-    List<Vopros>  listVoprosovDlyaDobavlenyya; //todo дбавить в сущнось зародыш
+    List<Vopros> listVoprosovDlyaDobavlenyya; //todo дбавить в сущнось зародыш
     int schetchikDobavlenyh = 0; //todo дбавить в сущнось зародыш
 
 
-   public int sizeDoVoprosa = 0;
+    public int sizeDoVoprosa = 0;
 
-   int shetchikProshenya = 0;
+    int shetchikProshenya = 0;
 
-   public boolean poshliProshenyeVoprosy;
+    public boolean poshliProshenyeVoprosy;
+
+    public List<Znamenitost> listIstoryyPokazovZnamenitosteynaMorde = new ArrayList<>();
 
 
     public Igrok(String idKuki) {
@@ -52,7 +54,6 @@ public class Igrok {
     public void setIdKuki(String idKuki) {
         this.idKuki = idKuki;
     }
-
 
 
     public List<Znamenitost> getListVozmohnyhVariantov() {
@@ -106,7 +107,7 @@ public class Igrok {
     }
 
     public void obnulenyeSchetchikDobavlenyh() {
-        schetchikDobavlenyh=0;
+        schetchikDobavlenyh = 0;
     }
 
     @Override
@@ -154,5 +155,13 @@ public class Igrok {
 
     public void setListVozmohVariantovSohibkami(List<Znamenitost> listVozmohVariantovSohibkami) {
         this.listVozmohVariantovSohibkami = listVozmohVariantovSohibkami;
+    }
+
+    public List<Znamenitost> getListIstoryyPokazovZnamenitosteynaMorde() {
+        return listIstoryyPokazovZnamenitosteynaMorde;
+    }
+
+    public void setListIstoryyPokazovZnamenitosteynaMorde(List<Znamenitost> listIstoryyPokazovZnamenitosteynaMorde) {
+        this.listIstoryyPokazovZnamenitosteynaMorde = listIstoryyPokazovZnamenitosteynaMorde;
     }
 }

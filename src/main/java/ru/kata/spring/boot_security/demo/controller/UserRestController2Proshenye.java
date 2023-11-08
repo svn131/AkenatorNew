@@ -1,8 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,12 +28,12 @@ import java.util.UUID;
 public class UserRestController2Proshenye {
 
 
-    private  UserService userService;
+    private UserService userService;
 
     private SaveService saveService;
 
     @Autowired
-    public UserRestController2Proshenye(UserService userService,SaveService saveService) {
+    public UserRestController2Proshenye(UserService userService, SaveService saveService) {
         this.userService = userService;
         this.saveService = saveService;
     }
@@ -62,7 +60,7 @@ public class UserRestController2Proshenye {
 
         Igrok igrok = userService.getIgrok(sessionId);
 
-        if(!igrok.poshliProshenyeVoprosy){ // первая и единственная установка прощенных
+        if (!igrok.poshliProshenyeVoprosy) { // первая и единственная установка прощенных
 
         }
 
@@ -70,22 +68,22 @@ public class UserRestController2Proshenye {
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
 
-        if(ostalosProZnamenitostey == 0){
+        if (ostalosProZnamenitostey == 0) {
             vopros.setId(5000);// na neznayku
             vopros.setValue("neznayu");
 
 
-    } else if (ostalosProZnamenitostey == 1) {
+        } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
-        }else {
+        } else {
 
 
-             vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
-             vopros.setId(vopros.getId());
-             vopros.setValue(vopros.getValue());
+            vopros = saveService.getProshenuyPriorityVopros(igrok); // todo pochistit vse ostavsheesya varianty
+            vopros.setId(vopros.getId());
+            vopros.setValue(vopros.getValue());
 
-         }
+        }
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш
@@ -120,13 +118,14 @@ public class UserRestController2Proshenye {
 
         Igrok igrok = userService.getIgrok(sessionId);
 
+        userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
 
-        saveService.reformaProshennuh(igrok, 1);
+        saveService.reformaProshennuh(igrok);
 
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
 
-        if(ostalosProZnamenitostey == 0){
+        if (ostalosProZnamenitostey == 0) {
             vopros.setId(5000);// na neznayku
             vopros.setValue("neznayu");
 
@@ -134,8 +133,7 @@ public class UserRestController2Proshenye {
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
-        }else {
-
+        } else {
 
 
             vopros.setId(5012);
@@ -172,12 +170,14 @@ public class UserRestController2Proshenye {
         Igrok igrok = userService.getIgrok(sessionId);
 
 
-        saveService.reformaProshennuh(igrok, 1);
+        userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
+
+        saveService.reformaProshennuh(igrok);
 
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
 
-        if(ostalosProZnamenitostey == 0){
+        if (ostalosProZnamenitostey == 0) {
             vopros.setId(5000);// na neznayku
             vopros.setValue("neznayu");
 
@@ -185,8 +185,7 @@ public class UserRestController2Proshenye {
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
-        }else {
-
+        } else {
 
 
             vopros.setId(5012);
@@ -221,12 +220,14 @@ public class UserRestController2Proshenye {
         Igrok igrok = userService.getIgrok(sessionId);
 
 
-        saveService.reformaProshennuh(igrok, 1);
+        userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+
+//        saveService.reformaProshennuh(igrok); нечего нменяеться смысла в реформе нет
 
 
         int ostalosProZnamenitostey = igrok.getListVozmohVariantovSohibkami().size();
 
-        if(ostalosProZnamenitostey == 0){
+        if (ostalosProZnamenitostey == 0) {
             vopros.setId(5000);// na neznayku
             vopros.setValue("neznayu");
 
@@ -234,8 +235,7 @@ public class UserRestController2Proshenye {
         } else if (ostalosProZnamenitostey == 1) {
             vopros.setId(5011);// na Conec
             vopros.setValue("conec");
-        }else {
-
+        } else {
 
 
             vopros.setId(5012);
