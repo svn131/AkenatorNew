@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.util.ExcelWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -371,7 +372,11 @@ public class SaveServiceImp implements SaveService {
         igrok.setListVozmohVariantovSohibkami(new ArrayList<Znamenitost>());  // чистим данные со старого хода
         List<Znamenitost> listVariantovsOshibkami = igrok.getListVozmohVariantovSohibkami();
 
-        List<Znamenitost> listvsehZnamenitosteyKromePokazanuhhRanee = repository.getZnamenitostList();
+        List<Znamenitost> listvsehZnamenitostey = repository.getZnamenitostList();
+
+        List<Znamenitost> listvsehZnamenitosteyKromePokazanuhhRanee = new ArrayList<>(listvsehZnamenitostey);
+
+
 
 
         listvsehZnamenitosteyKromePokazanuhhRanee.remove(igrok.listIstoryyPokazovZnamenitosteynaMorde.get(0)); // потом что тут показанна толко одна исключаем ее вообще

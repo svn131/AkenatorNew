@@ -54,6 +54,7 @@ public class UserServiceImp implements UserService {
 //    }
 
     public void removeIgrok(String kukiId){
+        System.out.println();
         repository.getListIgrokov().removeIf(igrok -> igrok.getIdKuki().equals(kukiId));
         System.out.println("REMOVEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeD");
     }
