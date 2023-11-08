@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Znamenitost {
 
     private String name;
 
-//    @OneToMany(mappedBy = "astonishments", cascade = CascadeType.ALL)
+    //    @OneToMany(mappedBy = "astonishments", cascade = CascadeType.ALL)
     private List<Vopros> otvetyList;
 
     private List<Integer> listSomnenyi = new ArrayList<>();
@@ -55,7 +54,7 @@ public class Znamenitost {
         this.otvetyList = otvetyList;
     }
 
-   public Znamenitost (Znamenitost znamenitost) {
+    public Znamenitost(Znamenitost znamenitost) {
         this.id = znamenitost.id;
         this.name = new String(znamenitost.getName());
 
@@ -79,7 +78,7 @@ public class Znamenitost {
     }
 
     public void addListSomnenyi(Integer i) {
-       listSomnenyi.add(i);
+        listSomnenyi.add(i);
     }
 
 
@@ -92,6 +91,24 @@ public class Znamenitost {
                 ", listSomnenyi=" + listSomnenyi +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Znamenitost other = (Znamenitost) obj;
+        return id == other.id;
+    }
+
 }
 
 

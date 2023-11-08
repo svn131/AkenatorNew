@@ -57,18 +57,19 @@ public class ConecREstController {
 
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
-        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
+//        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
+        List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohVariantovSohibkami();
 
         String otvet = ostavhieshesaVariantIinogaty.get(0).getName();
 ///// чекаем на дубли или 0 дубли
-        if (ostavhieshesaVariantIinogaty.size() > 1) {
-            otvet = null;
-            StringJoiner joiner = new StringJoiner(" или ");
-            for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
-                joiner.add(znamenitost.getName());
-            }
-            otvet = joiner.toString();
-        }
+//        if (ostavhieshesaVariantIinogaty.size() > 1) {
+//            otvet = null;
+//            StringJoiner joiner = new StringJoiner(" или ");
+//            for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
+//                joiner.add(znamenitost.getName());
+//            }
+//            otvet = joiner.toString();
+//        }
 
         Vopros vopros = new Vopros();
         vopros.setId(5002);

@@ -63,11 +63,11 @@ public class ConecVerDoREST {
         if (!igrok.poshliProshenyeVoprosy) {
 
 
-
             List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
 
             otvet = ostavhieshesaVariantIinogaty.get(0).getName(); // todo esli netu =0 прописать логику----------------------
             igrok.listIstoryyPokazovZnamenitosteynaMorde.add(ostavhieshesaVariantIinogaty.get(0)); //запоминаем знаменитости же спрашивали которые
+//            igrok.getListVozmohVariantovSohibkami().remove(igrok.getListVozmohVariantovSohibkami().get(0)); нельзя сюда
 
             saveService.loghimZnamenitostySoshibkamiVListVVSO(igrok);
 
@@ -82,10 +82,12 @@ public class ConecVerDoREST {
 //                }
 //                otvet = joiner.toString();
 //            }else
-                if(ostavhieshesaVariantIinogaty.size() == 0){
+            if (ostavhieshesaVariantIinogaty.size() == 0) {
 
                 otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
                 igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0)); //запоминаем знаменитости же спрашивали которые
+                igrok.getListVozmohVariantovSohibkami().remove(igrok.getListVozmohVariantovSohibkami().get(0)); // убераем ту сущность про которую уже спосили // todo можно дебажить должны сами убавляться псоле реформы
+
                 vopros.setId(5002);
                 vopros.setValue(otvet);
             }
@@ -103,8 +105,6 @@ public class ConecVerDoREST {
             vopros.setId(5002);
             vopros.setValue(otvet);
         }
-
-
 
 
         ////////
@@ -211,7 +211,6 @@ public class ConecVerDoREST {
         Igrok igrok = userService.getIgrok(sessionIda); // todo error ?
 
 
-
         Vopros vopros = new Vopros();
 
 //        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
@@ -221,8 +220,8 @@ public class ConecVerDoREST {
 //        } else { // todo на незнаю будем отправлять с контроллера 2
 
 
-            vopros.setId(5008); // отправляем задать вопос UserRestController2
-            vopros.setValue("newVopros");
+        vopros.setId(5008); // отправляем задать вопос UserRestController2
+        vopros.setValue("newVopros");
 
 
 //        }
