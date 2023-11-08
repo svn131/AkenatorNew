@@ -85,7 +85,7 @@ public class ConecREstController {
         if (otvet != null) {
             String filename = otvet + ".txt";
 //            String filename =  "1.txt";
-            String filePath = "C:\\333\\" + filename;
+            String filePath = "C:\\Opisanye\\" + filename;
 
             File file = new File(filePath);
 
