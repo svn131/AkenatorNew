@@ -18,6 +18,8 @@ public class Vopros implements Comparable<Vopros> {
 
     private int countMinus1;
 
+    private int castaNomer;
+
 
 
     public int getId() {
@@ -127,6 +129,13 @@ public class Vopros implements Comparable<Vopros> {
     }
 
 
+    public int getCastaNomer() {
+        return castaNomer;
+    }
+
+    public void setCastaNomer(int castaNomer) {
+        this.castaNomer = castaNomer;
+    }
 }
 
 //        if (this.countMinus1 > this.count1 && vo.countMinus1 > vo.count1) {

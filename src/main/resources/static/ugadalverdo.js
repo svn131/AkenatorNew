@@ -6,7 +6,7 @@ $(async function () {
 });
 
 async function thisUser() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/conec");
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conecVrDo");
 
     const data = await response.json();
 
@@ -30,7 +30,7 @@ async function thisUser() {
 
 
 async function answerYes() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/yes", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conecVrDo/yes", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/conecVrDo/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -68,37 +68,48 @@ async function answerNo() {
 
 
     // $('#vopros-value').text(data.value);
-    $('#vopros-value').empty().append(data.value);
+    // $('#vopros-value').empty().append(data.value);
+
+
+    if (voprosId === 5008) {
+        console.log('tttttttttttuuuuut');
+        window.location.href = BASEUUUUUURRRLLLL + "/myProject";
+    }
+
+    if (voprosId === 5010) {
+        console.log('tttttttttttuuuuuta');
+        window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
+    }
 
 
 
     console.log('dataNo');
 }
 
-async function sendData() {
-    const userInput = document.getElementById("userInput").value;
+// async function sendData() {
+//     const userInput = document.getElementById("userInput").value;
+//
+//     const response = await fetch(BASEUUUUUURRRLLLL + "/conecVrDo/no", {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ input: userInput })
+//     });
+//
+//     const data = await response.json();
+//     voprosId = data.id;
+//
+//     $('#vopros-value').empty().append(data.value);
+//
+//     console.log('dataaa');
+//
+//     if (voprosId === 5000) {
+//         console.log('tttttttttttuuuuut');
+//         window.location.href = BASEUUUUUURRRLLLL + "/myProject";
+//     }else if (voprosId === 5005){
+//         console.log('tttttttttttuuuuut5005');
+//         window.location.href = BASEUUUUUURRRLLLL + "/newSuhnost";
+//     }
 
-    const response = await fetch(BASEUUUUUURRRLLLL + "/conec/no", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ input: userInput })
-    });
-
-    const data = await response.json();
-    voprosId = data.id;
-
-    $('#vopros-value').empty().append(data.value);
-
-    console.log('dataaa');
-
-    if (voprosId === 5000) {
-        console.log('tttttttttttuuuuut');
-        window.location.href = BASEUUUUUURRRLLLL + "/myProject";
-    }else if (voprosId === 5005){
-        console.log('tttttttttttuuuuut5005');
-        window.location.href = BASEUUUUUURRRLLLL + "/newSuhnost";
-    }
-
-}
+// }

@@ -6,7 +6,7 @@ $(async function () {
 
 async function thisUser() {
     // const response = await fetch("http://85.116.125.155:8080/userProfile");
-    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile");
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile2");
 
 
 
@@ -35,7 +35,7 @@ async function thisUser() {
 
 
 async function answerYes() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/yes", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile2/yes", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ async function answerYes() {
 
 
 async function answerNo() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/no", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile2/no", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ async function answerNo() {
 }
 
 async function answerNone() {
-    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile/nany", {
+    const response = await fetch(BASEUUUUUURRRLLLL + "/userProfile2/nany", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

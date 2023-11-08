@@ -20,6 +20,8 @@ public interface SaveService {
 
     public  void umenshenyeVoprosEslivZarodysheUgheEst(Igrok igrok);
 
+    public Vopros getProshenuyPriorityVopros(Igrok igrok);
+
 
 
 

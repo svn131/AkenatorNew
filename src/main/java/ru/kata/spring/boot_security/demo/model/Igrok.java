@@ -8,6 +8,8 @@ public class Igrok {
 
     String idKuki;
 
+    List<Znamenitost> listVozmohVariantovSohibkami;
+
     List<Znamenitost> listVozmohnyhVariantov;
 
     List<Vopros>  listOstavshihsyaVoprosov;
@@ -20,6 +22,8 @@ public class Igrok {
 
 
    public int sizeDoVoprosa = 0;
+
+   int shetchikProshenya = 0;
 
 
     public Igrok(String idKuki) {
@@ -142,5 +146,11 @@ public class Igrok {
     }
 
 
+    public List<Znamenitost> getListVozmohVariantovSohibkami() {
+        return listVozmohVariantovSohibkami;
+    }
 
+    public void setListVozmohVariantovSohibkami(List<Znamenitost> listVozmohVariantovSohibkami) {
+        this.listVozmohVariantovSohibkami = listVozmohVariantovSohibkami;
+    }
 }

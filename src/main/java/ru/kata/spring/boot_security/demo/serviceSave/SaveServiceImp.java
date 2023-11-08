@@ -295,6 +295,10 @@ public class SaveServiceImp implements SaveService {
     }
 
 
+    public Vopros getProshenuyPriorityVopros(Igrok igrok){
+        return new Vopros();
+    }
+
 
 }
 

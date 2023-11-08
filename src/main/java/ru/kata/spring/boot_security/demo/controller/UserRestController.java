@@ -111,19 +111,19 @@ public class UserRestController {
 
         Vopros vopros = new Vopros();
 
-        if (userService.checkPosleVoprosa(igrok)) {
+        if (userService.checkPosleVoprosa(igrok)) { //варианы еще есть но сущности всеодинаковые только имена разные аоэтому вывод в свет
             userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             System.out.println("Neeeskolko");
 
 
             vopros = new Vopros();
             vopros.setId(5000);
-            vopros.setValue("Yes");
+            vopros.setValue("noDoble");
 
-        } else if (ostalos > 1) {
+        } else if (ostalos > 1) { //стандарт - логика - >  редирект сюда же
             userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             vopros = userService.getPriorityVopros(igrok);
-        } else if (ostalos == 1) {
+        } else if (ostalos <= 1) { // кончались варианты последний летит на показ морду
             userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
@@ -132,7 +132,7 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) {
+        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
             userService.setNazadanyiRaneeVoprosVLP(igrok, 1);
             vopros = new Vopros();
             vopros.setId(5001);
@@ -177,7 +177,7 @@ public class UserRestController {
 
         Vopros vopros = new Vopros();
 
-        if (userService.checkPosleVoprosa(igrok)) {
+        if (userService.checkPosleVoprosa(igrok)) { //варианы еще есть но сущности всеодинаковые только имена разные аоэтому вывод в свет
             userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
             System.out.println("Neeeskolko");
 
@@ -186,10 +186,10 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("noDoble");
 
-        } else if (ostalos > 1) {
+        } else if (ostalos > 1) { //стандарт - логика - >  редирект сюда же
             userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
             vopros = userService.getPriorityVopros(igrok);
-        } else if (ostalos == 1) {
+        } else if (ostalos <= 1) { // кончались варианты последний летит на показ морду
             userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
@@ -198,7 +198,7 @@ public class UserRestController {
             vopros.setId(5000);
             vopros.setValue("Yes");
 
-        } else if (ostalos == 0 || igrok.getListOstavshihsyaVoprosov().size() == 0) { // todo нужно ли вопросы 0 оставлять
+        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
             userService.setNazadanyiRaneeVoprosVLP(igrok, -1);
             vopros = new Vopros();
             vopros.setId(5001);
@@ -237,10 +237,37 @@ public class UserRestController {
         userService.reforma(igrok, 0);
 
         userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
-        Vopros vopros = userService.getPriorityVopros(igrok);
 
 
-        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
+        int ostalos = igrok.getListVozmohnyhVariantov().size();
+
+        Vopros vopros = new Vopros();
+
+
+
+
+        if (userService.checkPosleVoprosa(igrok)) { //варианы еще есть но сущности всеодинаковые только имена разные аоэтому вывод в свет
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+            System.out.println("Neeeskolko");
+
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("noDoble");
+
+        } else if (ostalos > 1) { //стандарт - логика - >  редирект сюда же
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+            vopros = userService.getPriorityVopros(igrok);
+        } else if (ostalos <= 1) { // кончались варианты последний летит на показ морду
+            userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+            System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+            vopros = new Vopros();
+            vopros.setId(5000);
+            vopros.setValue("Yes");
+
+        } else if (igrok.getListOstavshihsyaVoprosov().size() == 0) { // в случае если все вопросы заданны (оченьнаврядлт)- признаем что незнаем что это
             userService.setNazadanyiRaneeVoprosVLP(igrok, 0);
             vopros = new Vopros();
             vopros.setId(5001);
@@ -253,59 +280,6 @@ public class UserRestController {
         response.addHeader("Set-Cookie", "session_id=" + sessionIda);
         return ResponseEntity.ok(vopros);
     }
-//
-//    @PostMapping("/sesionnn")
-//    @CrossOrigin(origins = "*")
-//    public ResponseEntity sesionnn(HttpServletRequest request, HttpServletResponse response) {
-//        System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-//        // Генерируем случайное число
-//        Random rnd = new Random();
-//        int randomNumber = rnd.nextInt(43);
-//
-//        // Получаем значение сессионной куки
-//        String sessionId = String.valueOf(randomNumber);
-//        Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if (cookie.getName().equals("session_id")) {
-//                    sessionId = cookie.getValue();
-//                    System.out.println("кука---------------------------------- " + sessionId);
-//                    break;
-//                }
-//            }
-//        }
-//
-//        // Создаем объект Vopros с id и value
-//        Vopros vopros = new Vopros();
-//        vopros.setId(randomNumber);
-//        vopros.setValue(String.valueOf(randomNumber));
-//
-//        // Используйте значение sessionId для идентификации пользователя
-//// Устанавливаем куку сессии в ответе сервера
-//        if (sessionId != null) {
-//            response.addHeader("Set-Cookie", "session_id=" + sessionId);
-//        }
-//
-//        return ResponseEntity.ok(vopros);
-//    }
-
-
-//    @GetMapping("/neznayuChto")
-//    public String neznayuChto (){
-//        System.out.println("piiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-//        return "redirect:/neznayuChto";
-//    }
-
-
-//    @GetMapping()
-//    @CrossOrigin(origins = "*")
-//    public ResponseEntity<Vopros> vidachaFirst() {
-//        System.out.println("777777777777777777777777777777777777777777777777777777777777777777");
-//        Vopros vopros = new Vopros();
-//        vopros.setId(1);
-//        vopros.setValue("Gdeeeeeee  ?");
-//        return ResponseEntity.ok(vopros);
-//    }
 
 
 }
