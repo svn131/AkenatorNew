@@ -368,8 +368,13 @@ public class SaveServiceImp implements SaveService {
         igrok.setListVozmohVariantovSohibkami(new ArrayList<Znamenitost>());  // чистим данные со старого хода
         List<Znamenitost> listVariantovsOshibkami = igrok.getListVozmohVariantovSohibkami();
 
-        List<Znamenitost> listvsehZnamenitostey = repository.getZnamenitostList();
-        for (Znamenitost znamenitost : listvsehZnamenitostey) {
+        List<Znamenitost> listvsehZnamenitosteyKromePokazanuhhRanee = repository.getZnamenitostList();
+
+
+        listvsehZnamenitosteyKromePokazanuhhRanee.remove(igrok.listIstoryyPokazovZnamenitosteynaMorde.get(0)); // потом что тут показанна толко одна исключаем ее вообще
+
+
+        for (Znamenitost znamenitost : listvsehZnamenitosteyKromePokazanuhhRanee) {
             int oshhibki = 0;
             List<Vopros> listOtvetovEtoyZnamenytosty = znamenitost.getOtvetyList();
             for (Vopros otvetEtoyZnamenitosty : listOtvetovEtoyZnamenytosty) {

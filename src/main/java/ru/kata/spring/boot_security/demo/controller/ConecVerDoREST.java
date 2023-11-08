@@ -62,22 +62,27 @@ public class ConecVerDoREST {
 
         if (!igrok.poshliProshenyeVoprosy) {
 
-            saveService.loghimZnamenitostySoshibkamiVListVVSO(igrok);
+
 
             List<Znamenitost> ostavhieshesaVariantIinogaty = igrok.getListVozmohnyhVariantov();
 
             otvet = ostavhieshesaVariantIinogaty.get(0).getName(); // todo esli netu =0 прописать логику----------------------
             igrok.listIstoryyPokazovZnamenitosteynaMorde.add(ostavhieshesaVariantIinogaty.get(0)); //запоминаем знаменитости же спрашивали которые
 
-            if (ostavhieshesaVariantIinogaty.size() > 1) { // не будет только если функция дубля попустит парочку иза того что не убавляеться
-                otvet = null;
-                StringJoiner joiner = new StringJoiner(" или ");
-                for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
-                    joiner.add(znamenitost.getName());
-                    igrok.listIstoryyPokazovZnamenitosteynaMorde.add(znamenitost); //todo возможно убрать блок дублей ??  //запоминаем знаменитости же спрашивали которые
-                }
-                otvet = joiner.toString();
-            }else if(ostavhieshesaVariantIinogaty.size() == 0){
+            saveService.loghimZnamenitostySoshibkamiVListVVSO(igrok);
+
+
+
+//            if (ostavhieshesaVariantIinogaty.size() > 1) { // не будет только если функция дубля попустит парочку иза того что не убавляеться
+//                otvet = null;
+//                StringJoiner joiner = new StringJoiner(" или ");
+//                for (Znamenitost znamenitost : ostavhieshesaVariantIinogaty) {
+//                    joiner.add(znamenitost.getName());
+//                    igrok.listIstoryyPokazovZnamenitosteynaMorde.add(znamenitost); //todo возможно убрать блок дублей ??  //запоминаем знаменитости же спрашивали которые
+//                }
+//                otvet = joiner.toString();
+//            }else
+                if(ostavhieshesaVariantIinogaty.size() == 0){
 
                 otvet = igrok.getListVozmohVariantovSohibkami().get(0).getName();
                 igrok.listIstoryyPokazovZnamenitosteynaMorde.add(igrok.getListVozmohVariantovSohibkami().get(0)); //запоминаем знаменитости же спрашивали которые
@@ -208,18 +213,18 @@ public class ConecVerDoREST {
 
         Vopros vopros = new Vopros();
 
-        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
-            vopros.setId(5010); // отправляем на незнаю
-            vopros.setValue("NoneInfo");
-
-        } else {
+//        if (igrok.getListOstavshihsyaVoprosov().size() == 0) {
+//            vopros.setId(5010); // отправляем на незнаю
+//            vopros.setValue("NoneInfo");
+//
+//        } else { // todo на незнаю будем отправлять с контроллера 2
 
 
             vopros.setId(5008); // отправляем задать вопос UserRestController2
             vopros.setValue("newVopros");
 
 
-        }
+//        }
 
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // разрешает не чистить кэш

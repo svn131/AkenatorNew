@@ -73,13 +73,10 @@ async function answerNo() {
 
     if (voprosId === 5008) {
         console.log('tttttttttttuuuuut');
-        window.location.href = BASEUUUUUURRRLLLL + "/myProject";
+        window.location.href = BASEUUUUUURRRLLLL + "/userProfile2";
     }
 
-    if (voprosId === 5010) {
-        console.log('tttttttttttuuuuuta');
-        window.location.href = BASEUUUUUURRRLLLL + "/neznayuChto";
-    }
+
 
 
 
